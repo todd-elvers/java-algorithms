@@ -1,4 +1,4 @@
-package te.interview.prep.urlify;
+package te.interview.prep.strings;
 
 public class URLSpaceEncoder {
 

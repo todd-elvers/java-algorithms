@@ -2,6 +2,9 @@
 *.iml
 *.ipr
 *.iws
+.gradle
+gradle/
+out/
 
 # Targets Windows & Unix temporary files
 ~$*
