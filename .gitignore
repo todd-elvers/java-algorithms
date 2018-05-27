@@ -1,5 +1,8 @@
 .idea
 personal-9894.md
+*.iml
+*.ipr
+*.iws
 
 # Targets Windows & Unix temporary files
 ~$*
