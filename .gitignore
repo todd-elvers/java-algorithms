@@ -5,6 +5,7 @@
 .gradle
 gradle/
 out/
+build/
 
 # Targets Windows & Unix temporary files
 ~$*

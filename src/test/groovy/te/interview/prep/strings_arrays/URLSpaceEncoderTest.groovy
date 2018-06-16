@@ -1,4 +1,4 @@
-package te.interview.prep.strings
+package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
 
