@@ -1,29 +1,29 @@
 package te.interview.prep.linked_lists.domain;
 
-public class Node<T> {
-    public Node<T> next = null;
-    public T data;
+public class LinkedListNode {
+    public LinkedListNode next = null;
+    public int data;
 
-    public static <T> Node<T> create(T... elements) {
-        if(elements.length == 0) return null;
+    public static LinkedListNode create(int... integers) {
+        if(integers.length == 0) return null;
 
-        Node<T> head = new Node<>(elements[0]);
-        Node<T> n = head;
-        for(int i = 1; i < elements.length; i++) {
-            n.next = new Node<>(elements[i]);
+        LinkedListNode head = new LinkedListNode(integers[0]);
+        LinkedListNode n = head;
+        for(int i = 1, j = 1; i < integers.length; i++) {
+            n.next = new LinkedListNode(integers[i]);
             n = n.next;
         }
 
         return head;
     }
 
-    public Node(T data) {
+    public LinkedListNode(int data) {
         this.data = data;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        Node n = this;
+        LinkedListNode n = this;
 
         while(n.next != null) {
             sb.append(n.data);
