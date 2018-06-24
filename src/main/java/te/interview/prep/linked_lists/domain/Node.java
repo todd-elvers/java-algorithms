@@ -36,8 +36,4 @@ public class Node<T> {
         return sb.toString();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        return this.toString().equals(obj.toString());
-    }
 }
