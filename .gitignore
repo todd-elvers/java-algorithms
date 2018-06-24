@@ -3,10 +3,10 @@
 *.ipr
 *.iws
 .gradle
-gradle/
 out/
 build/
 
 # Targets Windows & Unix temporary files
 ~$*
 *~
+.DS_Store
