@@ -29,8 +29,7 @@ public class BasicStringCompressor {
 
             // O(1)
             boolean isLastChar = (i + 1) == uncompressed.length();
-            boolean isNextCharDifferent = uncompressed.charAt(i) != uncompressed.charAt(i + 1);
-            if (isLastChar || isNextCharDifferent) {
+            if (isLastChar || uncompressed.charAt(i) != uncompressed.charAt(i + 1)) {
                 compressionBuilder.append(uncompressed.charAt(i));
                 compressionBuilder.append(consecutiveCharCount);
 
