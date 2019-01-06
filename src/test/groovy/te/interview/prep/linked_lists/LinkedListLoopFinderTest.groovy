@@ -1,18 +1,42 @@
 package te.interview.prep.linked_lists
 
+
 import spock.lang.Specification
 import te.interview.prep.linked_lists.domain.LoopNode
 
 class LinkedListLoopFinderTest extends Specification {
 
-    LinkedListLoopFinder loopFinder = []
+    Optional<LoopNode<String>> result
+
+    def "can properly handle lists with only one node"() {
+        given:
+            LoopNode<String> list = LoopNode.create("A")
+
+        when:
+            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(list)
+
+        then:
+            !result.isPresent()
+
+        when:
+            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(list)
+
+        then:
+            !result.isPresent()
+    }
 
     def "can properly handle lists with no loop"() {
         given:
             LoopNode<String> list = LoopNode.create("A", "B", "C", "D")
 
         when:
-            Optional<LoopNode<String>> result = loopFinder.findStartOfLoop(list)
+            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(list)
+
+        then:
+            !result.isPresent()
+
+        when:
+            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(list)
 
         then:
             !result.isPresent()
@@ -25,7 +49,17 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            Optional<LoopNode<String>> result = loopFinder.findStartOfLoop(listWithLoop)
+            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(listWithLoop)
+
+        then: 'we find a node that has the expected data'
+            result.isPresent()
+            result.get().data == nodeLoopBeginsOn.data
+
+        and: 'that node references the expected space in memory'
+            result.get().is(nodeLoopBeginsOn)
+
+        when:
+            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
@@ -42,7 +76,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            Optional<LoopNode<String>> result = loopFinder.findStartOfLoop(listWithLoop)
+            Optional<LoopNode<String>> result = LinkedListLoopFinder.NAIVE.loopFinder.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()

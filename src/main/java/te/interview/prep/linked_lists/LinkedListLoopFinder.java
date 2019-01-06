@@ -5,21 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 import te.interview.prep.linked_lists.domain.LoopNode;
-import te.interview.prep.linked_lists.domain.Node;
 
-public class LinkedListLoopFinder {
+public enum LinkedListLoopFinder {
 
-    Optional<LoopNode<String>> findStartOfLoop(LoopNode<String> head) {
+    // Naive approach - excess memory used but can handle duplicate nodes
+    NAIVE((head) -> {
         Map<String, List<LoopNode>> nodeDataToNodes = new HashMap<>();
         LoopNode<String> startOfLoop = null;
 
         LoopNode<String> node = head;
-        while(node.next != null) {
+        while (node.next != null) {
             List<LoopNode> nodeReferences = nodeDataToNodes.getOrDefault(node.data, new ArrayList<>());
 
-            if(nodeReferences.contains(node)) {
+            if (nodeReferences.contains(node)) {
                 startOfLoop = node;
                 break;
             } else {
@@ -30,6 +31,39 @@ public class LinkedListLoopFinder {
         }
 
         return Optional.ofNullable(startOfLoop);
+    }),
+
+    // Improved approach - minimal memory usage but cannot handle duplicate nodes
+    IMPROVED(head -> {
+        if (head.next == null) return Optional.empty();
+
+        LoopNode<String> slowNavigator = head;
+        LoopNode<String> fastNavigator = head;
+
+        do {
+            slowNavigator = slowNavigator.next;
+            fastNavigator = fastNavigator.next.next;
+        } while (fastNavigator.next.next != null && !fastNavigator.equals(slowNavigator));
+
+
+        if (fastNavigator.next.next == null) {
+            return Optional.empty();
+        }
+
+
+        fastNavigator = head;
+        while (!fastNavigator.equals(slowNavigator)) {
+            fastNavigator = fastNavigator.next;
+            slowNavigator = slowNavigator.next;
+        }
+
+        return Optional.of(fastNavigator);
+    });
+
+    public Function<LoopNode<String>, Optional<LoopNode<String>>> loopFinder;
+
+    LinkedListLoopFinder(Function<LoopNode<String>, Optional<LoopNode<String>>> loopFinder) {
+        this.loopFinder = loopFinder;
     }
 
 }
