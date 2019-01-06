@@ -13,13 +13,13 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> list = LoopNode.create("A")
 
         when:
-            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(list)
+            result = LinkedListLoopFinder.Approach.NAIVE.apply(list)
 
         then:
             !result.isPresent()
 
         when:
-            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(list)
+            result = LinkedListLoopFinder.Approach.IMPROVED.apply(list)
 
         then:
             !result.isPresent()
@@ -30,13 +30,13 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> list = LoopNode.create("A", "B", "C", "D")
 
         when:
-            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(list)
+            result = LinkedListLoopFinder.Approach.NAIVE.apply(list)
 
         then:
             !result.isPresent()
 
         when:
-            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(list)
+            result = LinkedListLoopFinder.Approach.IMPROVED.apply(list)
 
         then:
             !result.isPresent()
@@ -49,7 +49,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            result = LinkedListLoopFinder.NAIVE.loopFinder.apply(listWithLoop)
+            result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
@@ -59,7 +59,7 @@ class LinkedListLoopFinderTest extends Specification {
             result.get().is(nodeLoopBeginsOn)
 
         when:
-            result = LinkedListLoopFinder.IMPROVED.loopFinder.apply(listWithLoop)
+            result = LinkedListLoopFinder.Approach.IMPROVED.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
@@ -76,7 +76,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            Optional<LoopNode<String>> result = LinkedListLoopFinder.NAIVE.loopFinder.apply(listWithLoop)
+            Optional<LoopNode<String>> result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
