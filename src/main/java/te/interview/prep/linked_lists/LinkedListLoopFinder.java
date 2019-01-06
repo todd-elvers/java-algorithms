@@ -12,7 +12,7 @@ import te.interview.prep.linked_lists.domain.LoopNode;
 public enum LinkedListLoopFinder {
 
     // Naive approach - excess memory used but can handle duplicate nodes
-    NAIVE((head) -> {
+    NAIVE(head -> {
         Map<String, List<LoopNode>> nodeDataToNodes = new HashMap<>();
         LoopNode<String> startOfLoop = null;
 
