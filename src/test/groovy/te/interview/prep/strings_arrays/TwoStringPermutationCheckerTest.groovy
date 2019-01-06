@@ -1,15 +1,18 @@
 package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 @SuppressWarnings("GroovyPointlessBoolean")
-class PermutationDeciderTest extends Specification {
+class TwoStringPermutationCheckerTest extends Specification {
 
-    PermutationDecider permutationDecider = []
-
-    def "can determine if two strings are permutations"() {
+    @Unroll("given #s1 and #s2 we should return #result")
+    def "can determine if one string is a permutation of another"() {
         expect:
-            permutationDecider.isPermutation(s1, s2) == result
+            TwoStringPermutationChecker.Approach.USING_SET.apply(s1, s2) == result
+
+        and:
+            TwoStringPermutationChecker.Approach.USING_MAP.apply(s1, s2) == result
 
         where:
             s1       | s2       || result
