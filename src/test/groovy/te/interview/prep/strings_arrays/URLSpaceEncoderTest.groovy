@@ -6,7 +6,7 @@ class URLSpaceEncoderTest extends Specification {
 
     URLSpaceEncoder encoder = []
 
-    def "can encode spaces in a string with '%20'"() {
+    def "can encode spaces in a string with '%20' in-place"() {
         given:
             String input = "Mr John Smith    "
             String expectedOutput = "Mr%20John%20Smith"
