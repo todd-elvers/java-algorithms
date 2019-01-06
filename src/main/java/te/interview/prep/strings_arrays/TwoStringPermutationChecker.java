@@ -10,15 +10,18 @@ import java.util.function.Function;
 public class TwoStringPermutationChecker {
 
     enum Approach {
+
         USING_SET((s1, s2) -> {
             if (s1 == null || s2 == null || s1.length() != s2.length()) return false;
 
-            Set<Character> charsOfStr1 = new HashSet<>();   // O(s1)
+            // O(s1)
+            Set<Character> charsOfStr1 = new HashSet<>();
             for (char c : s1.toCharArray()) {
                 charsOfStr1.add(c);
             }
 
-            for (char c : s2.toCharArray()) {               // O(s2)
+            // O(s2)
+            for (char c : s2.toCharArray()) {
                 if (!charsOfStr1.contains(c)) {
                     return false;
                 }
@@ -26,6 +29,7 @@ public class TwoStringPermutationChecker {
 
             return true;
         }),
+
         USING_MAP((s1, s2) -> {
             // O(1)
             if(s1 == null || s2 == null || s1.length() != s2.length()) return false;
