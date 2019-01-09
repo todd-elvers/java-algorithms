@@ -1,6 +1,6 @@
 package te.interview.prep.strings_arrays;
 
-public class URLSpaceEncoder {
+public class InPlaceUrlSpaceEncoder {
 
     public String encode(String str, int trueLength) {
         return encode(str.toCharArray(), trueLength);

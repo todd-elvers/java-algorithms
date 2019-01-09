@@ -2,9 +2,9 @@ package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
 
-class URLSpaceEncoderTest extends Specification {
+class InPlaceUrlSpaceEncoderTest extends Specification {
 
-    URLSpaceEncoder encoder = []
+    InPlaceUrlSpaceEncoder encoder = []
 
     def "can encode spaces in a string with '%20' in-place"() {
         given:
