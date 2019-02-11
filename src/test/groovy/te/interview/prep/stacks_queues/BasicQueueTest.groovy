@@ -1,12 +1,13 @@
-package te.interview.prep.stacks_queues.domain
+package te.interview.prep.stacks_queues
 
 import spock.lang.Specification
+import te.interview.prep.stacks_queues.BasicQueue
 
-class MyQueueTest extends Specification {
+class BasicQueueTest extends Specification {
 
     def "preserves FIFO ordering"() {
         given:
-            MyQueue<String> queue = new MyQueue<String>()
+            BasicQueue<String> queue = new BasicQueue<String>()
 
         and:
             queue.add("X")

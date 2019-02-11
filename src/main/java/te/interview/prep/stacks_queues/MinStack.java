@@ -1,4 +1,4 @@
-package te.interview.prep.stacks_queues.domain;
+package te.interview.prep.stacks_queues;
 
 import java.util.EmptyStackException;
 
@@ -7,7 +7,7 @@ import te.interview.prep.linked_lists.domain.Node;
 /**
  * 3.2
  */
-public class MinStack extends MyStack<Integer> {
+public class MinStack extends BasicStack<Integer> {
     static class MinNode extends Node<Integer> {
         Integer substackMinimum;
         MinNode(Integer data, Integer substackMinimum) {

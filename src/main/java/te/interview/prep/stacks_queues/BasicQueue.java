@@ -1,12 +1,14 @@
-package te.interview.prep.stacks_queues.domain;
+package te.interview.prep.stacks_queues;
 
 import te.interview.prep.linked_lists.domain.Node;
+import te.interview.prep.stacks_queues.domain.Queue;
 
 import java.util.NoSuchElementException;
 
-public class MyQueue<T> {
-    private Node<T> first;
-    private Node<T> last;
+@SuppressWarnings("WeakerAccess")
+public class BasicQueue<T> implements Queue<T> {
+    Node<T> first;
+    Node<T> last;
 
     public void add(T item) {
         Node<T> node = new Node<>(item);

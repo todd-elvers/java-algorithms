@@ -1,11 +1,12 @@
-package te.interview.prep.stacks_queues.domain;
+package te.interview.prep.stacks_queues;
 
 import te.interview.prep.linked_lists.domain.Node;
+import te.interview.prep.stacks_queues.domain.Stack;
 
 import java.util.EmptyStackException;
 
-public class MyStack<T> {
-    protected Node<T> top;
+public class BasicStack<T> implements Stack<T> {
+    Node<T> top;
 
     public T pop() {
         if(top == null) throw new EmptyStackException();

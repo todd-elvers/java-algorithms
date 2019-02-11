@@ -1,6 +1,7 @@
-package te.interview.prep.stacks_queues.domain
+package te.interview.prep.stacks_queues
 
 import spock.lang.Specification
+import te.interview.prep.stacks_queues.MinStack
 
 class MinStackTest extends Specification {
 
