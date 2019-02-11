@@ -5,50 +5,47 @@ import te.interview.prep.linked_lists.domain.Node;
 import java.util.NoSuchElementException;
 
 public class MyQueue<T> {
-    private Node<T> front;
-    private Node<T> back;
+    private Node<T> first;
+    private Node<T> last;
 
     public void add(T item) {
         Node<T> node = new Node<>(item);
 
-        // Edge case: adding first element to queue
-        if(back == null) {
-            back = node;
-        } else {
-            back.next = node;
-            back = node;
+        // Edge case: when queue is empty we cannot update last's next field
+        if(last != null) {
+            last.next = node;
         }
 
-        // Edge case: adding first element to queue
-        if(front == null) {
-            front = back;
+        last = node;
+
+        // Edge case: when queue is empty the first element is also the last
+        if(first == null) {
+            first = last;
         }
     }
 
     public T remove() {
-        if(front == null) throw new NoSuchElementException();
+        // Edge case: removing from an already empty queue
+        if(first == null) throw new NoSuchElementException();
 
-        T item = front.data;
+        T item = first.data;
 
-        // Edge case
-        boolean isRemovingLastElement = (front.next == null);
-        if(isRemovingLastElement) {
-            front = null;
-            back = null;
-        } else {
-            front = front.next;
+        first = first.next;
+
+        // Edge case: removing last element in the list
+        if(first == null) {
+            last = null;
         }
 
         return item;
     }
 
     public T peek() {
-        if(front == null) throw new NoSuchElementException();
-
-        return front.data;
+        if(first == null) throw new NoSuchElementException();
+        return first.data;
     }
 
     public boolean isEmpty() {
-        return front == null;
+        return first == null;
     }
 }

@@ -5,7 +5,7 @@ import te.interview.prep.linked_lists.domain.Node;
 import java.util.EmptyStackException;
 
 public class MyStack<T> {
-    private Node<T> top;
+    protected Node<T> top;
 
     public T pop() {
         if(top == null) throw new EmptyStackException();
