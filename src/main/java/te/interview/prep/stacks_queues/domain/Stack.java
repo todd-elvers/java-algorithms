@@ -6,6 +6,12 @@ public interface Stack<T> {
 
     void push(T item);
 
+    default void pushAll(T... items) {
+        for(T item : items) {
+            push(item);
+        }
+    }
+
     T peek();
 
     boolean isEmpty();
