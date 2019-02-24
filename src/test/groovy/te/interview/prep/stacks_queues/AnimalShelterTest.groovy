@@ -51,10 +51,15 @@ class AnimalShelterTest extends Specification {
 
         when:
             animalShelter.enqueue(cat1)
+            sleep(100)
             animalShelter.enqueue(dog1)
+            sleep(100)
             animalShelter.enqueue(cat2)
+            sleep(100)
             animalShelter.enqueue(dog2)
+            sleep(100)
             animalShelter.enqueue(cat3)
+            sleep(100)
             animalShelter.enqueue(dog3)
 
         then:
