@@ -9,6 +9,6 @@ class BreadthFirstSearchPrinterTest extends DirectedGraphTest {
             String visitOrder = breadthFirstSearch.search(graph)
 
         then:
-            visitOrder == "A,X,L,B,Y,M,N,C,D,Z,E,"
+            visitOrder == "A,X,L,B,Y,M,N,D,C,Z,E,"
     }
 }
