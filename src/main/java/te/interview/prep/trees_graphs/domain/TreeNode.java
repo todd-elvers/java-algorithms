@@ -15,4 +15,8 @@ public class TreeNode {
         this.right = right;
     }
 
+    public boolean isLeafNode() {
+        return left == null && right == null;
+    }
+
 }
