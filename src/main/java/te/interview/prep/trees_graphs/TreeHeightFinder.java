@@ -9,8 +9,8 @@ public class TreeHeightFinder {
     }
 
     private int findHeight(TreeNode node, int height) {
-        int left = (node.left != null) ? findHeight(node.left, height + 1) : 0;
-        int right = (node.right != null) ? findHeight(node.right, height + 1) : 0;
+        int left = (node.left != null) ? findHeight(node.left, height + 1) : height;
+        int right = (node.right != null) ? findHeight(node.right, height + 1) : height;
 
         return Math.max(height, Math.max(left, right));
     }
