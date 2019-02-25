@@ -5,22 +5,22 @@ import te.interview.prep.trees_graphs.domain.TreeNode
 
 abstract class TreeTest extends Specification {
 
-    TreeNode n3 = [3]
-    TreeNode n6 = [6]
-    TreeNode n5 = [5, n3, n6]
+    TreeNode n7 = [7]
+    TreeNode n5 = [5]
+    TreeNode n6 = [6, n5, n7]
 
     TreeNode n1 = [1]
-    TreeNode n7 = [7]
-    TreeNode n2 = [2, n1, n7]
+    TreeNode n3 = [3]
+    TreeNode n2 = [2, n1, n3]
 
     /**
              4
            /   \
-          2     5
+          2     6
          / \   / \
-        1   7 3   6
+        1   3 5   7
      */
-    TreeNode root = [4, n2, n5]
+    TreeNode root = [4, n2, n6]
 
     /**
      * @return true if, and only if, all nodes in the tree adhere to the following

@@ -15,14 +15,14 @@ class LinkedListPerLevelGeneratorTest extends TreeTest {
         and:
             def level2 = new LinkedList<TreeNode>()
             level2.add(new TreeNode(2))
-            level2.add(new TreeNode(5))
+            level2.add(new TreeNode(6))
 
         and:
             def level3 = new LinkedList<TreeNode>()
             level3.add(new TreeNode(1))
-            level3.add(new TreeNode(7))
             level3.add(new TreeNode(3))
-            level3.add(new TreeNode(6))
+            level3.add(new TreeNode(5))
+            level3.add(new TreeNode(7))
 
         and:
             List<LinkedList<TreeNode>> expected = [

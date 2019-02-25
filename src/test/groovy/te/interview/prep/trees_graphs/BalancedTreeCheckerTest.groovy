@@ -18,7 +18,7 @@ class BalancedTreeCheckerTest extends TreeTest {
             isBalancedImproved
 
         when:
-            n3.right = new TreeNode(10)
+            n7.right = new TreeNode(10)
             isBalanced = balancedTreeChecker.isBalanced(root)
             isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
 
@@ -28,7 +28,7 @@ class BalancedTreeCheckerTest extends TreeTest {
             isBalancedImproved
 
         when:
-            n3.right.right = new TreeNode(11)
+            n7.right.right = new TreeNode(11)
             isBalanced = balancedTreeChecker.isBalanced(root)
             isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
 
