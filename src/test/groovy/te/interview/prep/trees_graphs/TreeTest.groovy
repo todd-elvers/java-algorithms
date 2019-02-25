@@ -5,6 +5,23 @@ import te.interview.prep.trees_graphs.domain.TreeNode
 
 abstract class TreeTest extends Specification {
 
+    TreeNode n3 = [3]
+    TreeNode n6 = [6]
+    TreeNode n5 = [5, n3, n6]
+
+    TreeNode n1 = [1]
+    TreeNode n7 = [7]
+    TreeNode n2 = [2, n1, n7]
+
+    /**
+             4
+           /   \
+          2     5
+         / \   / \
+        1   7 3   6
+     */
+    TreeNode root = [4, n2, n5]
+
     /**
      * @return true if, and only if, all nodes in the tree adhere to the following
      * rule: Left(n) <= n < Right(n), where Left() is all nodes left of n, and Right()
