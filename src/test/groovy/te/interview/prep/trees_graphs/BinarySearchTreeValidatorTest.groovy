@@ -1,30 +1,18 @@
 package te.interview.prep.trees_graphs
 
-import spock.lang.Specification
+
 import spock.lang.Subject
 import te.interview.prep.trees_graphs.domain.TreeNode
 
-class BinarySearchTreeValidatorTest extends Specification {
+class BinarySearchTreeValidatorTest extends TreeTest {
 
     @Subject
     BinarySearchTreeValidator binarySearchTreeValidator = []
 
-    TreeNode n3 = [3]
-    TreeNode n6 = [6]
-    TreeNode n5 = [5, n3, n6]
-
-    TreeNode n1 = [1]
-    TreeNode n7 = [7]
-    TreeNode n2 = [2, n1, n7]
-
-    /**
-              4
-            /   \
-           2     5
-          / \   / \
-         1   7 3   6
-     */
-    TreeNode root = [4, n2, n5]
+    TreeNode n25 = [25]
+    TreeNode n10 = [25, null, n25]
+    TreeNode n30 = [30]
+    TreeNode rootOfInvalidBST = [30, n10, n30]
 
     def "can determine if tree is a binary search tree"() {
         when:
@@ -34,7 +22,7 @@ class BinarySearchTreeValidatorTest extends Specification {
             isBST
 
         when:
-            n3.right = new TreeNode(1)
+            n7.right = new TreeNode(1)
             isBST = binarySearchTreeValidator.isValidBST(root)
 
         then:
@@ -45,6 +33,12 @@ class BinarySearchTreeValidatorTest extends Specification {
             isBST = binarySearchTreeValidator.isValidBST(root)
 
         then:
-            isBST
+            !isBST
+
+        when:
+            isBST = binarySearchTreeValidator.isValidBST(rootOfInvalidBST)
+
+        then:
+            !isBST
     }
 }

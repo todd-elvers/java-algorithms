@@ -2,22 +2,26 @@ package te.interview.prep.trees_graphs;
 
 import te.interview.prep.trees_graphs.domain.TreeNode;
 
+/**
+ * 4.5 Validate that a Binary Tree is a Binary Search Tree
+ * TODO: Come back to this, this is *very* tricky recursion that's also hard to visualize.
+ */
 public class BinarySearchTreeValidator {
 
     public boolean isValidBST(TreeNode tree) {
-        return isValidBST(tree, true);
+        return isValidBST(tree, null, null);
     }
 
-    private boolean isValidBST(TreeNode node, boolean isValid) {
-        if (!isValid) return false;
+    private boolean isValidBST(TreeNode node, Integer min, Integer max) {
+        if(node == null) return true;
 
-        boolean isLeftValid =
-                node.left == null || isValidBST(node.left, node.left.data <= node.data);
+        // If a min exists we're branching right, so our node must be strictly > than the min.
+        if(min != null && node.data <= min) return false;
 
-        boolean isRightValid =
-                node.right == null || isValidBST(node.right, node.right.data > node.data);
+        // If a max exists we're branching left, so our node must be strictly <= to the max.
+        if(max != null && node.data > max) return false;
 
-        return isLeftValid && isRightValid;
+        return isValidBST(node.right, node.data, max) && isValidBST(node.left, min, node.data);
     }
 
 }
