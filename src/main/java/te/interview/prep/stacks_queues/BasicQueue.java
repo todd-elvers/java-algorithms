@@ -1,9 +1,9 @@
 package te.interview.prep.stacks_queues;
 
+import java.util.NoSuchElementException;
+
 import te.interview.prep.linked_lists.domain.Node;
 import te.interview.prep.stacks_queues.domain.Queue;
-
-import java.util.NoSuchElementException;
 
 @SuppressWarnings("WeakerAccess")
 public class BasicQueue<T> implements Queue<T> {

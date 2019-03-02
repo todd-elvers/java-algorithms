@@ -1,6 +1,5 @@
 package te.interview.prep.trees_graphs;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 import te.interview.prep.trees_graphs.domain.Graph;

@@ -1,9 +1,9 @@
 package te.interview.prep.linked_lists;
 
-import te.interview.prep.linked_lists.domain.LinkedListNode;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import te.interview.prep.linked_lists.domain.LinkedListNode;
 
 public class NodeDeduplicator {
 

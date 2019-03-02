@@ -1,6 +1,6 @@
 package te.interview.prep.stacks_queues
 
-import spock.lang.Ignore
+
 import spock.lang.Specification
 
 class SetOfStacksTest extends Specification {
