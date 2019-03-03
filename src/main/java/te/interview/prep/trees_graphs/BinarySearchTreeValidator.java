@@ -4,7 +4,6 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 
 /**
  * 4.5 Validate that a Binary Tree is a Binary Search Tree
- * TODO: Come back to this, this is *very* tricky recursion that's also hard to visualize.
  */
 public class BinarySearchTreeValidator {
 
