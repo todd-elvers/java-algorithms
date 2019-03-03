@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import te.interview.prep.trees_graphs.domain.Graph;
 import te.interview.prep.trees_graphs.domain.GraphNode;
 
-public class BreadthFirstSearchPrinter {
+public class GraphBreadthFirstSearchPrinter {
 
     // Prints the order in which nodes were visited
     String search(Graph graph) {

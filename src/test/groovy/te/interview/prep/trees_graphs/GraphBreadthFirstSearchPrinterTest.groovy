@@ -1,8 +1,8 @@
 package te.interview.prep.trees_graphs
 
-class BreadthFirstSearchPrinterTest extends DirectedGraphTest {
+class GraphBreadthFirstSearchPrinterTest extends DirectedGraphTest {
 
-    BreadthFirstSearchPrinter breadthFirstSearch = []
+    GraphBreadthFirstSearchPrinter breadthFirstSearch = []
 
     def "can print nodes in BFS order"() {
         when:

@@ -6,7 +6,7 @@ import te.interview.prep.trees_graphs.domain.GraphNode;
 /**
  * TODO: Come back to me, didn't quite get it (base case caught me)
  */
-public class DepthFirstSearchPrinter {
+public class GraphDepthFirstSearchPrinter {
 
     // Prints the order in which nodes were visited
     String search(Graph graph) {

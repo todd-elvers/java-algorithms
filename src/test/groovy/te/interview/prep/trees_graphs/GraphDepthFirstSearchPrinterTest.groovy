@@ -1,8 +1,8 @@
 package te.interview.prep.trees_graphs
 
-class DepthFirstSearchPrinterTest extends DirectedGraphTest {
+class GraphDepthFirstSearchPrinterTest extends DirectedGraphTest {
 
-    DepthFirstSearchPrinter depthFirstSearch = []
+    GraphDepthFirstSearchPrinter depthFirstSearch = []
 
     def "can print nodes in DFS order"() {
         when:
