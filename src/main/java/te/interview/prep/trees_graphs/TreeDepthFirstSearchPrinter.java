@@ -10,7 +10,6 @@ public class TreeDepthFirstSearchPrinter {
         return visitOrder.toString();
     }
 
-    //TODO: Ensure the visit should happen before the left & right evaluation
     private void search(TreeNode node, StringBuilder visitOrder) {
         if (node == null) return;
 
