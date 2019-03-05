@@ -8,6 +8,9 @@ import java.util.Map;
 
 /**
  * 4.7 Determine the build order for projects given their dependencies
+ * TODO: Determine how to handle cycles in our dependency graph
+ * TODO: Lookup definition for Strongly-Connected Components (SCC)
+ * TODO: Analyze Tarjan's algorithm for detecting loops in Graphs
  */
 public class BuildOrderDeterminer {
 
