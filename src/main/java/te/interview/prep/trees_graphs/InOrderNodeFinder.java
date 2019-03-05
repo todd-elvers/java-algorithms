@@ -40,7 +40,7 @@ class LinkedTreeNode extends TreeNode {
 
     public LinkedTreeNode(int data, LinkedTreeNode left, LinkedTreeNode right) {
         super(data, left, right);
-//        this.left = left;
-//        this.right = right;
+        this.left = left;
+        this.right = right;
     }
 }
