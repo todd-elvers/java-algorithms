@@ -48,7 +48,8 @@ abstract class TreeTest extends Specification {
             node?.data ? node?.data + (node.isLeafNode() ? "*" : " ") : "  "
         }
 
-        println("   $node.data")
+        def rootSpaceBuffer = node.data < 0 ? 2 : 3
+        println("${" "*rootSpaceBuffer}$node.data")
         println("  / \\")
         println(" ${printNode(node.left)}  ${printNode(node.right)}")
 
