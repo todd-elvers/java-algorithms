@@ -20,27 +20,27 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
  */
 public class SumPathCounter {
 
-    int countPathSumsForEntireTree(TreeNode node, int targetSum) {
+    int countAllPathsWithSum(TreeNode node, int targetSum) {
         if(node == null) return 0;
 
         // Count all paths that equal targetSum from current node
-        int sumCount = countPathSumsFromNode(node, targetSum, 0);
+        int sumCount = countPathsWithSum(node, targetSum, 0);
 
         // Count all paths tha equal targetSum for left subtree & right subtree
-        sumCount += countPathSumsForEntireTree(node.left, targetSum);
-        sumCount += countPathSumsForEntireTree(node.right, targetSum);
+        sumCount += countAllPathsWithSum(node.left, targetSum);
+        sumCount += countAllPathsWithSum(node.right, targetSum);
 
         return sumCount;
     }
 
-    int countPathSumsFromNode(TreeNode node, int targetSum, int runningSum) {
+    int countPathsWithSum(TreeNode node, int targetSum, int runningSum) {
         if(node == null) return 0;
 
         runningSum += node.data;
         int sumCount = (runningSum == targetSum) ? 1 : 0;
 
-        sumCount += countPathSumsFromNode(node.left, targetSum, runningSum);
-        sumCount += countPathSumsFromNode(node.right, targetSum, runningSum);
+        sumCount += countPathsWithSum(node.left, targetSum, runningSum);
+        sumCount += countPathsWithSum(node.right, targetSum, runningSum);
 
         return sumCount;
     }
