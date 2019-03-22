@@ -11,6 +11,26 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
  */
 public class LinkedListPerLevelGenerator {
 
+    List<LinkedList<TreeNode>> generateUsingBFS(TreeNode root) {
+        List<LinkedList<TreeNode>> lists = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            lists.add(queue);                       // Add previous level
+            LinkedList<TreeNode> parents = queue;   // Go to next level
+            queue = new LinkedList<>();
+
+            for(TreeNode parent : parents) {
+                if(parent.left != null) queue.add(parent.left);
+                if(parent.right != null) queue.add(parent.right);
+            }
+
+        }
+
+        return lists;
+    }
+
     List<LinkedList<TreeNode>> generateUsingDFS(TreeNode root) {
         List<LinkedList<TreeNode>> lists = new ArrayList<>();
         createLevelLinkedList(root, lists, 0);
@@ -38,26 +58,6 @@ public class LinkedListPerLevelGenerator {
 
         createLevelLinkedList(root.left, lists, level + 1);
         createLevelLinkedList(root.right, lists, level + 1);
-    }
-
-    List<LinkedList<TreeNode>> generateUsingBFS(TreeNode root) {
-        List<LinkedList<TreeNode>> lists = new ArrayList<>();
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            lists.add(queue);                       // Add previous level
-            LinkedList<TreeNode> parents = queue;   // Go to next level
-            queue = new LinkedList<>();
-
-            for(TreeNode parent : parents) {
-                if(parent.left != null) queue.add(parent.left);
-                if(parent.right != null) queue.add(parent.right);
-            }
-
-        }
-
-        return lists;
     }
 
 }
