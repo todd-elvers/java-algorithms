@@ -8,21 +8,21 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 public class ImprovedBalancedTreeChecker {
 
     boolean isBalanced(TreeNode node) {
-        return checkHeight(node) != Integer.MIN_VALUE;
+        return checkHeight(node) != null;
     }
 
-    private int checkHeight(TreeNode node) {
+    private Integer checkHeight(TreeNode node) {
         if(node == null) return -1;
 
-        int leftHeight = checkHeight(node.left);
-        if(leftHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        Integer leftHeight = checkHeight(node.left);
+        if(leftHeight == null) return null;
 
-        int rightHeight = checkHeight(node.right);
-        if(rightHeight == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        Integer rightHeight = checkHeight(node.right);
+        if(rightHeight == null) return null;
 
-        int heightDifference = leftHeight - rightHeight;
-        if(Math.abs(heightDifference) > 1) {
-            return Integer.MIN_VALUE;
+        if(Math.abs(leftHeight - rightHeight) > 1) {
+            // Short-circuit and terminate height check eagerly
+            return null;
         } else {
             return Math.max(leftHeight, rightHeight) + 1;
         }

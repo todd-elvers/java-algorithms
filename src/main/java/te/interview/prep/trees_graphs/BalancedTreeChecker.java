@@ -8,17 +8,26 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 public class BalancedTreeChecker {
 
     public boolean isBalanced(TreeNode node) {
-        int leftHeight = findHeightDiff(node.left, 1);
-        int rightHeight = findHeightDiff(node.right, 1);
+        if(node == null) return true;
 
-        return Math.abs(rightHeight - leftHeight) <= 1;
+        int leftHeight = findHeight(node.left);
+        int rightHeight = findHeight(node.right);
+
+        boolean isNodeBalanced = Math.abs(leftHeight - rightHeight) <= 1;
+
+        return isNodeBalanced
+                && isBalanced(node.left)
+                && isBalanced(node.right);
     }
 
-    private int findHeightDiff(TreeNode node, int height) {
-        int left = (node.left != null) ? findHeightDiff(node.left, height + 1) : height;
-        int right = (node.right != null) ? findHeightDiff(node.right, height + 1) : height;
+    @SuppressWarnings("Duplicates")
+    private int findHeight(TreeNode node) {
+        if(node == null) return -1;
 
-        return Math.max(left, right);
+        int leftHeight = findHeight(node.left);
+        int rightHeight = findHeight(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
 }

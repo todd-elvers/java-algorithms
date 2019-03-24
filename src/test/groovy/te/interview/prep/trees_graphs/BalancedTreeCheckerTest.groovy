@@ -36,16 +36,16 @@ class BalancedTreeCheckerTest extends TreeTest {
             !isBalanced
             !isBalancedImproved
 
-        when:
+        when: 'we re-balance the tree again'
             n1.left = new TreeNode(12)
+            n5.left = new TreeNode(30)
+            n7.left = new TreeNode(40)
             isBalanced = balancedTreeChecker.isBalanced(root)
             isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
 
-        then:
+        then: 'our code returns true again'
             isBalanced
-            // The book's approach seems to fail under this circumstance
-            // however my approach does not.
-//            isBalancedImproved
+            isBalancedImproved
     }
 
 }
