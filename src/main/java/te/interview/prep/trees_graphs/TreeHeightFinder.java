@@ -5,18 +5,12 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 public class TreeHeightFinder {
 
     public int findHeight(TreeNode node) {
-        return findHeight(node, 0);
-    }
+        if(node == null) return -1;
 
-    private int findHeight(TreeNode node, int height) {
-        if(node == null) return height;
-        if(node.left == null && node.right == null) return height;
-
-        int leftHeight = findHeight(node.left, height);
-        int rightHeight = findHeight(node.right, height);
+        int leftHeight = findHeight(node.left);
+        int rightHeight = findHeight(node.right);
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
 
 }
