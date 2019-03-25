@@ -41,17 +41,19 @@ abstract class TreeTest extends Specification {
     /**
      * Prints all the nodes in a tree. Nodes with * next to them are leaf nodes.
      */
-    void printTree( TreeNode node) {
-        if(!node || node.isLeafNode()) return
+    void printTree(TreeNode node) {
+        if (!node || node.isLeafNode()) return
 
         def printNode = { TreeNode n ->
-            node?.data ? node?.data + (node.isLeafNode() ? "*" : " ") : "  "
+            def leftPadding = n?.data < 0 ? "" : " "
+            def data = n?.data ? n?.data + (n?.isLeafNode() ? "*" : " ") : "   "
+            return leftPadding + data
         }
 
-        def rootSpaceBuffer = node.data < 0 ? 2 : 3
-        println("${" "*rootSpaceBuffer}$node.data")
+        def leftPadding = node.data < 0 ? "  " : "   "
+        println("$leftPadding$node.data")
         println("  / \\")
-        println(" ${printNode(node.left)}  ${printNode(node.right)}")
+        println("${printNode(node.left)} ${printNode(node.right)}")
 
         printTree(node.left)
         printTree(node.right)

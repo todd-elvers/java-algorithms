@@ -27,7 +27,6 @@ class MinimalHeightBinaryTreeBuilderTest extends TreeTest {
             TreeNode output = binaryTreeBuilder.build(input)
 
         then:
-            printTree(output)
             isBinarySearchTree(output)
             findHeightOfTree(output) == 3
     }
