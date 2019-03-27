@@ -1,22 +1,15 @@
 package te.interview.prep.trees_graphs.domain;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import static java.util.stream.Collectors.joining;
-
-public class BSTNode {
-    public int data;
+public class BSTNode extends Node {
     public BSTNode left;
     public BSTNode right;
 
     public BSTNode(int data) {
-        this(data, null, null);
+        super(data);
     }
 
     public BSTNode(int data, BSTNode left, BSTNode right) {
-        this.data = data;
+        super(data);
         this.left = left;
         this.right = right;
     }
@@ -87,68 +80,11 @@ public class BSTNode {
         second.data = temp;
     }
 
-    public boolean isLeafNode() {
-        return left == null && right == null;
+    public BSTNode getLeft() {
+        return left;
     }
 
-    /**
-     * This allows us to use the .equals() functions provided by collections, which simplifies
-     * testing.
-     *
-     * @return true if, and only if, object being compared to is a non-null instance of {@link
-     * BSTNode} whose {@link BSTNode#data} field matches exactly.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (!(obj instanceof BSTNode)) return false;
-
-        BSTNode otherTree = (BSTNode) obj;
-
-        return this.data == otherTree.data;
-    }
-
-    @SuppressWarnings("Duplicates")
-    public boolean deepEquals(BSTNode otherTree) {
-        if (otherTree == null) return false;
-
-        return this.data == otherTree.data
-                && isSubtreeEqual(this.left, otherTree.left)
-                && isSubtreeEqual(this.right, otherTree.right);
-    }
-
-    @SuppressWarnings("Duplicates")
-    private boolean isSubtreeEqual(BSTNode node1, BSTNode node2) {
-        if (node1 == null && node2 == null) {
-            return true;
-        } else if (node1 == null || node2 == null) {
-            return false;
-        } else {
-            return node1.deepEquals(node2);
-        }
-    }
-
-    public String getAllValuesAsBreadthFirstCSV() {
-        List<Integer> values = new ArrayList<>();
-
-        LinkedList<BSTNode> queue = new LinkedList<>();
-        queue.addLast(this);
-        while (!queue.isEmpty()) {
-            BSTNode node = queue.removeFirst();
-            if (node == null) {
-                values.add(null);
-            } else {
-                values.add(node.data);
-                queue.add(node.left);
-                queue.add(node.right);
-            }
-        }
-
-        return "[" + values.stream().map(String::valueOf).collect(joining(",")) + "]";
-    }
-
-    @Override
-    public String toString() {
-        return getAllValuesAsBreadthFirstCSV();
+    public BSTNode getRight() {
+        return right;
     }
 }
