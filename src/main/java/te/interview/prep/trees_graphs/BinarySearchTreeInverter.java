@@ -17,10 +17,4 @@ public class BinarySearchTreeInverter {
         return node;
     }
 
-    private void swapNodes(TreeNode left, TreeNode right) {
-        TreeNode temp = left;
-        left = right;
-        right = left;
-    }
-
 }
