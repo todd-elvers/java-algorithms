@@ -36,6 +36,7 @@ public class TreeNode {
         return this.data == otherTree.data;
     }
 
+    @SuppressWarnings("Duplicates")
     public boolean deepEquals(TreeNode otherTree) {
         if(otherTree == null) return false;
 
@@ -44,6 +45,7 @@ public class TreeNode {
                 && isSubtreeEqual(this.right, otherTree.right);
     }
 
+    @SuppressWarnings("Duplicates")
     private boolean isSubtreeEqual(TreeNode node1, TreeNode node2) {
         if(node1 == null && node2 == null) {
             return true;

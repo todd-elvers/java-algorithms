@@ -1,5 +1,11 @@
 package te.interview.prep.trees_graphs.domain;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static java.util.stream.Collectors.joining;
+
 public class BSTNode {
     public int data;
     public BSTNode left;
@@ -16,9 +22,9 @@ public class BSTNode {
     }
 
     public BSTNode find(int data) {
-        if(data == this.data) {
+        if (data == this.data) {
             return this;
-        } else if(data < this.data) {
+        } else if (data < this.data) {
             return (this.left == null) ? null : this.left.find(data);
         } else {
             return (this.right == null) ? null : this.right.find(data);
@@ -26,14 +32,14 @@ public class BSTNode {
     }
 
     public void insert(int data) {
-        if(data < this.data) {
-            if(this.left == null) {
+        if (data < this.data) {
+            if (this.left == null) {
                 this.left = new BSTNode(data);
             } else {
                 this.left.insert(data);
             }
         } else if (data > this.data) {
-            if(this.right == null) {
+            if (this.right == null) {
                 this.right = new BSTNode(data);
             } else {
                 this.right.insert(data);
@@ -48,41 +54,31 @@ public class BSTNode {
     }
 
     public BSTNode delete(BSTNode node, int dataToDelete) {
-        if(node == null) return null;
+        if (node == null) return null;
 
-        if(dataToDelete < node.data) {
+        if (dataToDelete < node.data) {
             node.left = delete(node.left, dataToDelete);
-        } else if(dataToDelete > node.data) {
+        } else if (dataToDelete > node.data) {
             node.right = delete(node.right, dataToDelete);
         } else {
-            node = handleNodeDeletionCases(node, dataToDelete);
+            if(node.left == null) {
+                return node.right;
+            } else if(node.right == null) {
+                return node.left;
+            } else {
+                BSTNode inOrderSuccessor = findLeftMostNode(node.right);
+                swapData(inOrderSuccessor, node);
+                node.right = delete(node.right, dataToDelete);
+            }
         }
 
         return node;
     }
 
-    /**
-     * Handles the 3 cases that exist when removing a node from a Binary Search Tree:
-     *  1.) Node to delete is a leaf node
-     *  2.) Node to delete has a single child (left or right)
-     *  3.) Node to delete has two children
-     */
-    private BSTNode handleNodeDeletionCases(BSTNode node, int dataToDelete) {
-        if(node.left != null && node.right != null) {
-            BSTNode inOrderSuccessor = findLeftMostNode(node.right);
-            swapData(inOrderSuccessor, node);
-            node = delete(node.right, dataToDelete);
-        } else if (node.left != null) {
-            node.data = node.left.data;
-            node.left = node.left.left;
-        } else if (node.right != null) {
-            node.data = node.right.data;
-            node.right = node.right.right;
-        } else {
-            node = null;
-        }
-
-        return node;
+    private BSTNode findLeftMostNode(BSTNode node) {
+        if (node == null) return null;
+        if (node.left == null) return node;
+        return findLeftMostNode(node.left);
     }
 
     private void swapData(BSTNode first, BSTNode second) {
@@ -91,35 +87,68 @@ public class BSTNode {
         second.data = temp;
     }
 
-    private BSTNode findLeftMostNode(BSTNode node) {
-        if(node == null) return null;
-        if(node.left == null) return node;
-        return findLeftMostNode(node.left);
-    }
-
     public boolean isLeafNode() {
         return left == null && right == null;
     }
 
     /**
-     * This allows us to use the .equals() functions provided by collections,
-     * which simplifies testing.
+     * This allows us to use the .equals() functions provided by collections, which simplifies
+     * testing.
      *
-     * @return true if, and only if, object being compared to is a non-null instance
-     * of {@link BSTNode} whose {@link BSTNode#data} field matches exactly.
+     * @return true if, and only if, object being compared to is a non-null instance of {@link
+     * BSTNode} whose {@link BSTNode#data} field matches exactly.
      */
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) return false;
-        if(!(obj instanceof BSTNode)) return false;
+        if (obj == null) return false;
+        if (!(obj instanceof BSTNode)) return false;
 
         BSTNode otherTree = (BSTNode) obj;
 
         return this.data == otherTree.data;
     }
 
+    @SuppressWarnings("Duplicates")
+    public boolean deepEquals(BSTNode otherTree) {
+        if (otherTree == null) return false;
+
+        return this.data == otherTree.data
+                && isSubtreeEqual(this.left, otherTree.left)
+                && isSubtreeEqual(this.right, otherTree.right);
+    }
+
+    @SuppressWarnings("Duplicates")
+    private boolean isSubtreeEqual(BSTNode node1, BSTNode node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        } else if (node1 == null || node2 == null) {
+            return false;
+        } else {
+            return node1.deepEquals(node2);
+        }
+    }
+
+    public String getAllValuesAsBreadthFirstCSV() {
+        List<Integer> values = new ArrayList<>();
+
+        LinkedList<BSTNode> queue = new LinkedList<>();
+        queue.addLast(this);
+        while (!queue.isEmpty()) {
+            BSTNode node = queue.removeFirst();
+            if (node == null) {
+                values.add(null);
+            } else {
+                values.add(node.data);
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+        }
+
+        return "[" + values.stream().map(String::valueOf).collect(joining(",")) + "]";
+    }
+
     @Override
     public String toString() {
-        return String.valueOf(data);
+        return getAllValuesAsBreadthFirstCSV();
     }
 }
