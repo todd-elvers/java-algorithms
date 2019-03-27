@@ -6,7 +6,7 @@ class TreeDepthFirstSearchPrinterTest extends TreeTest {
 
     def "can print nodes in DFS order"() {
         expect:
-            depthFirstSearch.search(root) == "4,2,1,3,6,5,7,"
+            depthFirstSearch.search(binarySearchTree) == "4,2,1,3,6,5,7,"
     }
 
 }

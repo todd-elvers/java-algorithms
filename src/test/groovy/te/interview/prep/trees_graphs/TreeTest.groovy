@@ -14,13 +14,15 @@ abstract class TreeTest extends Specification {
     TreeNode n2 = [2, n1, n3]
 
     /**
-             4
-           /   \
-          2     6
-         / \   / \
-        1   3 5   7
+        A valid BST to simplify testing.
+
+                 4
+               /   \
+              2     6
+            /  \   / \
+           1    3 5   7
      */
-    TreeNode root = [4, n2, n6]
+    TreeNode binarySearchTree = [4, n2, n6]
 
     /**
      * @return true if, and only if, all nodes in the tree adhere to the following

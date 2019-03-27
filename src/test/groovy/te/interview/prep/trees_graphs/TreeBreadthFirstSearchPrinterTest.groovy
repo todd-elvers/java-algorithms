@@ -6,7 +6,7 @@ class TreeBreadthFirstSearchPrinterTest extends TreeTest {
 
     def "can print nodes in BFS order"() {
         expect:
-            breadthFirstSearch.search(root) == "4,2,6,1,3,5,7,"
+            breadthFirstSearch.search(binarySearchTree) == "4,2,6,1,3,5,7,"
     }
 
 }

@@ -35,13 +35,13 @@ class LinkedListPerLevelGeneratorTest extends TreeTest {
             ]
 
         when:
-            List<LinkedList<TreeNode>> actual = linkedListPerLevelGenerator.generateUsingBFS(root)
+            List<LinkedList<TreeNode>> actual = linkedListPerLevelGenerator.generateUsingBFS(binarySearchTree)
 
         then:
             actual == expected
 
         when:
-            actual = linkedListPerLevelGenerator.generateUsingDFS(root)
+            actual = linkedListPerLevelGenerator.generateUsingDFS(binarySearchTree)
 
         then:
             actual == expected

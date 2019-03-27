@@ -54,9 +54,9 @@ class FirstCommonAncestorFinderTest extends TreeTest {
             commonAncestorFinder.find(null, n2, n3) == null
 
         and: 'null when either node to find the ancestor of is null'
-            commonAncestorFinder.find(root, null, n3) == null
-            commonAncestorFinder.find(root, n2, null) == null
-            commonAncestorFinder.find(root, null, null) == null
+            commonAncestorFinder.find(binarySearchTree, null, n3) == null
+            commonAncestorFinder.find(binarySearchTree, n2, null) == null
+            commonAncestorFinder.find(binarySearchTree, null, null) == null
     }
 
 }

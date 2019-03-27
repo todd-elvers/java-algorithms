@@ -16,21 +16,21 @@ class BinarySearchTreeValidatorTest extends TreeTest {
 
     def "can determine if tree is a binary search tree"() {
         when:
-            boolean isBST = binarySearchTreeValidator.isValidBST(root)
+            boolean isBST = binarySearchTreeValidator.isValidBST(binarySearchTree)
 
         then:
             isBST
 
         when:
             n7.right = new TreeNode(1)
-            isBST = binarySearchTreeValidator.isValidBST(root)
+            isBST = binarySearchTreeValidator.isValidBST(binarySearchTree)
 
         then:
             !isBST
 
         when:
             n3.right = new TreeNode(99)
-            isBST = binarySearchTreeValidator.isValidBST(root)
+            isBST = binarySearchTreeValidator.isValidBST(binarySearchTree)
 
         then:
             !isBST

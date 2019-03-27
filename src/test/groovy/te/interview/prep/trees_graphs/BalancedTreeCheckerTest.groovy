@@ -10,8 +10,8 @@ class BalancedTreeCheckerTest extends TreeTest {
 
     def "can tell whether a tree's subtrees differ in height by more than one"() {
         when:
-            boolean isBalanced = balancedTreeChecker.isBalanced(root)
-            boolean isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
+            boolean isBalanced = balancedTreeChecker.isBalanced(binarySearchTree)
+            boolean isBalancedImproved = improvedBalancedTreeChecker.isBalanced(binarySearchTree)
 
         then:
             isBalanced
@@ -19,8 +19,8 @@ class BalancedTreeCheckerTest extends TreeTest {
 
         when:
             n7.right = new TreeNode(10)
-            isBalanced = balancedTreeChecker.isBalanced(root)
-            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
+            isBalanced = balancedTreeChecker.isBalanced(binarySearchTree)
+            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(binarySearchTree)
 
 
         then:
@@ -29,8 +29,8 @@ class BalancedTreeCheckerTest extends TreeTest {
 
         when:
             n7.right.right = new TreeNode(11)
-            isBalanced = balancedTreeChecker.isBalanced(root)
-            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
+            isBalanced = balancedTreeChecker.isBalanced(binarySearchTree)
+            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(binarySearchTree)
 
         then:
             !isBalanced
@@ -40,8 +40,8 @@ class BalancedTreeCheckerTest extends TreeTest {
             n1.left = new TreeNode(12)
             n5.left = new TreeNode(30)
             n7.left = new TreeNode(40)
-            isBalanced = balancedTreeChecker.isBalanced(root)
-            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(root)
+            isBalanced = balancedTreeChecker.isBalanced(binarySearchTree)
+            isBalancedImproved = improvedBalancedTreeChecker.isBalanced(binarySearchTree)
 
         then: 'our code returns true again'
             isBalanced

@@ -8,8 +8,8 @@ class SubtreeCheckerTest extends TreeTest {
 
     def "can determine when second tree is a subtree of the first"() {
         expect:
-            subtreeChecker.containsTree(root, null)
-            subtreeChecker.containsTree(root, n6)
+            subtreeChecker.containsTree(binarySearchTree, null)
+            subtreeChecker.containsTree(binarySearchTree, n6)
             subtreeChecker.containsTree(n2, n1)
             !subtreeChecker.containsTree(n2, n6)
     }
@@ -21,6 +21,6 @@ class SubtreeCheckerTest extends TreeTest {
             TreeNode n5 = [2, null, n7]
 
         expect:
-            !subtreeChecker.containsTree(root, n5)
+            !subtreeChecker.containsTree(binarySearchTree, n5)
     }
 }
