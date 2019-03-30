@@ -19,7 +19,7 @@ public class LinkedListLoopFinder {
             LoopNode<String> startOfLoop = null;
 
             LoopNode<String> node = head;
-            while (node.next != null) {
+            while (node != null && node.next != null) {
                 List<LoopNode> nodeReferences = nodeDataToNodes.getOrDefault(node.data, new ArrayList<>());
 
                 if (nodeReferences.contains(node)) {
@@ -37,7 +37,7 @@ public class LinkedListLoopFinder {
 
         // Improved approach - minimal memory usage but cannot handle duplicate nodes
         IMPROVED(head -> {
-            if (head.next == null) return Optional.empty();
+            if (head == null || head.next == null) return Optional.empty();
 
             LoopNode<String> slowNavigator = head;
             LoopNode<String> fastNavigator = head;

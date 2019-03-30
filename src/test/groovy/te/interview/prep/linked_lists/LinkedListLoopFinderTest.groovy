@@ -1,6 +1,5 @@
 package te.interview.prep.linked_lists
 
-
 import spock.lang.Specification
 import te.interview.prep.linked_lists.domain.LoopNode
 
@@ -8,38 +7,28 @@ class LinkedListLoopFinderTest extends Specification {
 
     Optional<LoopNode<String>> result
 
+    def "can properly handle lists with no nodes"() {
+        expect:
+            !LinkedListLoopFinder.Approach.NAIVE.apply(null).isPresent()
+            !LinkedListLoopFinder.Approach.IMPROVED.apply(null).isPresent()
+    }
+
     def "can properly handle lists with only one node"() {
         given:
             LoopNode<String> list = LoopNode.create("A")
 
-        when:
-            result = LinkedListLoopFinder.Approach.NAIVE.apply(list)
-
-        then:
-            !result.isPresent()
-
-        when:
-            result = LinkedListLoopFinder.Approach.IMPROVED.apply(list)
-
-        then:
-            !result.isPresent()
+        expect:
+            !LinkedListLoopFinder.Approach.NAIVE.apply(list).isPresent()
+            !LinkedListLoopFinder.Approach.IMPROVED.apply(list).isPresent()
     }
 
     def "can properly handle lists with no loop"() {
         given:
             LoopNode<String> list = LoopNode.create("A", "B", "C", "D")
 
-        when:
-            result = LinkedListLoopFinder.Approach.NAIVE.apply(list)
-
-        then:
-            !result.isPresent()
-
-        when:
-            result = LinkedListLoopFinder.Approach.IMPROVED.apply(list)
-
-        then:
-            !result.isPresent()
+        expect:
+            !LinkedListLoopFinder.Approach.NAIVE.apply(list).isPresent()
+            !LinkedListLoopFinder.Approach.IMPROVED.apply(list).isPresent()
     }
 
     def "can properly handle lists with loops"() {
@@ -76,7 +65,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            Optional<LoopNode<String>> result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
+            result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
