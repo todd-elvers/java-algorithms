@@ -2,6 +2,9 @@ package te.interview.prep;
 
 import java.util.HashSet;
 
+/**
+ * @see <a href="https://leetcode.com/problems/happy-number/">Happy Number Problem</a>
+ */
 public class HappyNumberDeterminer {
 
     public boolean isHappy(int n) {
@@ -9,12 +12,7 @@ public class HappyNumberDeterminer {
     }
 
     private boolean isHappy(int n, HashSet<Integer> results) {
-        int sum = 0;
-        while(n != 0) {
-            int nextDigit = n % 10;
-            sum += (nextDigit * nextDigit);
-            n = n / 10;
-        }
+        int sum = sumOfSquareOfEachDigit(n);
 
         if(results.contains(sum)) {
             return false;
@@ -25,4 +23,14 @@ public class HappyNumberDeterminer {
         return (sum == 1) || isHappy(sum, results);
     }
 
+    private int sumOfSquareOfEachDigit(int n) {
+        int sum = 0;
+
+        while(n != 0) {
+            sum += (n % 10) * (n % 10);
+            n = n / 10;
+        }
+
+        return sum;
+    }
 }

@@ -10,6 +10,7 @@ class HappyNumberDeterminerTest extends Specification {
         expect:
             happyNumberDeterminer.isHappy(19)
             !happyNumberDeterminer.isHappy(2)
+            !happyNumberDeterminer.isHappy(0)
     }
 
 }
