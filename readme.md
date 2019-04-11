@@ -1,7 +1,7 @@
 # java-algorithms
 
-Initially this started as a just a fork of [this repo](https://github.com/jwasham/coding-interview-university) but grew into a testing ground 
-for all things Java interview-prep related.
+Initially this started as just a fork of [this repo](https://github.com/jwasham/coding-interview-university) but quickly grew into 
+a testing ground for all things Java interview-prep related.
 
 Contained in this repo are my attempts at:
 - Algorithms & data structures from Cracking the Coding Interview (6th Edition)
