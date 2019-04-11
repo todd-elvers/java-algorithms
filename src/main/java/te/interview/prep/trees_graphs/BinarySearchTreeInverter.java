@@ -2,6 +2,9 @@ package te.interview.prep.trees_graphs;
 
 import te.interview.prep.trees_graphs.domain.TreeNode;
 
+/**
+ * @see <a href="https://leetcode.com/problems/invert-binary-tree/">Problem on leetcode</a>
+ */
 public class BinarySearchTreeInverter {
 
     public TreeNode invert(TreeNode node) {
