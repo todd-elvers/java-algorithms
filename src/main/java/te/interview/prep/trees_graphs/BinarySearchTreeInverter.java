@@ -6,7 +6,6 @@ public class BinarySearchTreeInverter {
 
     public TreeNode invert(TreeNode node) {
         if(node == null) return null;
-        if(node.isLeafNode()) return node;
 
         swapLeftAndRight(node);
 
