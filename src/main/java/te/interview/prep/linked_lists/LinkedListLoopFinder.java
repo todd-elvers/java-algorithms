@@ -9,16 +9,43 @@ import java.util.function.Function;
 
 import te.interview.prep.linked_lists.domain.LoopNode;
 
+/**
+ * @see <a href="https://leetcode.com/problems/linked-list-cycle-ii/">Problem on leetcode</a>
+ */
 public class LinkedListLoopFinder {
 
-    enum Approach {
+    // Improved approach - minimal memory usage but cannot handle duplicate nodes
+    static class FastSlowRunnerApproach {
+        Optional<LoopNode<String>> findLoop(LoopNode<String> head) {
+            if(head == null || head.next == null) return Optional.empty();
 
-        // Naive approach - excess memory used but can handle duplicate nodes
-        NAIVE(head -> {
+            LoopNode<String> fast = head;
+            LoopNode<String> slow = head;
+
+            do {
+                slow = slow.next;
+                fast = fast.next.next;
+            } while(fast != null && fast.next != null && slow != fast);
+
+            if(slow != fast) return Optional.empty();
+
+            fast = head;
+            while(slow != fast){
+                slow = slow.next;
+                fast = fast.next;
+            }
+
+            return Optional.of(slow);
+        }
+    }
+
+    // Naive approach - excess memory used but can handle duplicate nodes
+    static class HashMapApproach {
+        Optional<LoopNode<String>> findLoop(LoopNode<String> head) {
             Map<String, List<LoopNode>> nodeDataToNodes = new HashMap<>();
             LoopNode<String> startOfLoop = null;
-
             LoopNode<String> node = head;
+
             while (node != null && node.next != null) {
                 List<LoopNode> nodeReferences = nodeDataToNodes.getOrDefault(node.data, new ArrayList<>());
 
@@ -33,44 +60,7 @@ public class LinkedListLoopFinder {
             }
 
             return Optional.ofNullable(startOfLoop);
-        }),
-
-        // Improved approach - minimal memory usage but cannot handle duplicate nodes
-        IMPROVED(head -> {
-            if (head == null || head.next == null) return Optional.empty();
-
-            LoopNode<String> slowNavigator = head;
-            LoopNode<String> fastNavigator = head;
-
-            do {
-                slowNavigator = slowNavigator.next;
-                fastNavigator = fastNavigator.next.next;
-            } while (fastNavigator.next.next != null && !fastNavigator.equals(slowNavigator));
-
-
-            if (fastNavigator.next.next == null) {
-                return Optional.empty();
-            }
-
-
-            fastNavigator = head;
-            while (!fastNavigator.equals(slowNavigator)) {
-                fastNavigator = fastNavigator.next;
-                slowNavigator = slowNavigator.next;
-            }
-
-            return Optional.of(fastNavigator);
-        });
-
-
-        Function<LoopNode<String>, Optional<LoopNode<String>>> function;
-
-        Approach(Function<LoopNode<String>, Optional<LoopNode<String>>> function) {
-            this.function = function;
-        }
-
-        public Optional<LoopNode<String>> apply(LoopNode<String> data) {
-            return function.apply(data);
         }
     }
+
 }

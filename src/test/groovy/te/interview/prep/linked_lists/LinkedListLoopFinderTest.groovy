@@ -5,12 +5,15 @@ import te.interview.prep.linked_lists.domain.LoopNode
 
 class LinkedListLoopFinderTest extends Specification {
 
+    LinkedListLoopFinder.HashMapApproach hashMapApproach = []
+    LinkedListLoopFinder.FastSlowRunnerApproach fastSlowRunnerApproach = []
+
     Optional<LoopNode<String>> result
 
     def "can properly handle lists with no nodes"() {
         expect:
-            !LinkedListLoopFinder.Approach.NAIVE.apply(null).isPresent()
-            !LinkedListLoopFinder.Approach.IMPROVED.apply(null).isPresent()
+            !hashMapApproach.findLoop(null).isPresent()
+            !fastSlowRunnerApproach.findLoop(null).isPresent()
     }
 
     def "can properly handle lists with only one node"() {
@@ -18,8 +21,8 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> list = LoopNode.create("A")
 
         expect:
-            !LinkedListLoopFinder.Approach.NAIVE.apply(list).isPresent()
-            !LinkedListLoopFinder.Approach.IMPROVED.apply(list).isPresent()
+            !hashMapApproach.findLoop(list).isPresent()
+            !fastSlowRunnerApproach.findLoop(list).isPresent()
     }
 
     def "can properly handle lists with no loop"() {
@@ -27,8 +30,8 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> list = LoopNode.create("A", "B", "C", "D")
 
         expect:
-            !LinkedListLoopFinder.Approach.NAIVE.apply(list).isPresent()
-            !LinkedListLoopFinder.Approach.IMPROVED.apply(list).isPresent()
+            !hashMapApproach.findLoop(list).isPresent()
+            !fastSlowRunnerApproach.findLoop(list).isPresent()
     }
 
     def "can properly handle lists with loops"() {
@@ -38,7 +41,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
+            result = hashMapApproach.findLoop(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
@@ -48,7 +51,7 @@ class LinkedListLoopFinderTest extends Specification {
             result.get().is(nodeLoopBeginsOn)
 
         when:
-            result = LinkedListLoopFinder.Approach.IMPROVED.apply(listWithLoop)
+            result = fastSlowRunnerApproach.findLoop(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
@@ -65,7 +68,7 @@ class LinkedListLoopFinderTest extends Specification {
             LoopNode<String> listWithLoop = appendToEndOfList(list, nodeLoopBeginsOn)
 
         when:
-            result = LinkedListLoopFinder.Approach.NAIVE.apply(listWithLoop)
+            result = hashMapApproach.findLoop(listWithLoop)
 
         then: 'we find a node that has the expected data'
             result.isPresent()
