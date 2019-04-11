@@ -6,24 +6,23 @@ public class FindKthToLastElement {
 
     // O(n)
     public LinkedListNode findKthFromLastElement(LinkedListNode head, int k) {
-        LinkedListNode p1 = head;
-        LinkedListNode p2 = head;
+        LinkedListNode fast = head;
+        LinkedListNode slow = head;
 
-        // Move p1 k nodes into the list
-        // k = 0
-        for (int i = 0; i < k + 1; i++) {       // 1 added here so that p1 is one ahead of p2, so p2 will be last element when k = 0
-            if (p1 == null) return null;
-            p1 = p1.next;
+        // Move 'fast' k nodes into the list
+        for (int i = 0; i < k + 1; i++) {
+            if (fast == null) return null;
+            fast = fast.next;
         }
 
-        // Move both pointers forward until p1 is at the end
-        // At this point p2 will be at the kth element
-        while (p1 != null) {
-            p1 = p1.next;
-            p2 = p2.next;
+        // Iterate both pointers until 'fast' is at the end at which point
+        // 'slow' will be at the kth position in the linked list
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
         }
 
-        return p2;
+        return slow;
     }
 
 }
