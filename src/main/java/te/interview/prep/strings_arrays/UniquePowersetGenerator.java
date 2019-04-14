@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @see <a href="https://leetcode.com/problems/subsets-ii/">Problem on leetcode</a>
  */
-public class DuplicateAwarePowersetGenerator {
+public class UniquePowersetGenerator {
 
     public List<List<Integer>> generate(int[] nums) {
         // This ensures our simple duplicate check of nums[i]==nums[i-1] always works

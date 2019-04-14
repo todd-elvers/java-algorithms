@@ -2,9 +2,9 @@ package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
 
-class DuplicateAwarePowersetGeneratorTest extends Specification {
+class UniquePowersetGeneratorTest extends Specification {
 
-    DuplicateAwarePowersetGenerator duplicateAwarePowersetGenerator = []
+    UniquePowersetGenerator duplicateAwarePowersetGenerator = []
 
     def "can generate a unique powerset for a set of integers containing duplicates"() {
         given:
