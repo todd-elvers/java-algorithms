@@ -22,13 +22,12 @@ public class CombinationSumFinder {
     }
 
     private List<List<Integer>> backtrack(List<List<Integer>> results, List<Integer> temp, int[] nums, int start, int remaining) {
-        if(remaining < 0) return results;
-
-        if(remaining == 0) {
+        if (remaining == 0) {
             results.add(new ArrayList<>(temp));
-        } else {
-            for(int i = start; i < nums.length; i++) {
+        } else if (remaining > 0) {
+            for (int i = start; i < nums.length; i++) {
                 temp.add(nums[i]);
+                // Not i+1 b/c we're our output is allowed to reuse values
                 backtrack(results, temp, nums, i, remaining - nums[i]);
                 temp.remove(temp.size() - 1);
             }
