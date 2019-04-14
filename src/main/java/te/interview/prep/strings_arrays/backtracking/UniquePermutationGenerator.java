@@ -1,4 +1,4 @@
-package te.interview.prep.strings_arrays;
+package te.interview.prep.strings_arrays.backtracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;

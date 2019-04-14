@@ -1,6 +1,7 @@
-package te.interview.prep.strings_arrays
+package te.interview.prep.strings_arrays.backtracking
 
 import spock.lang.Specification
+import te.interview.prep.strings_arrays.backtracking.UniquePowersetGenerator
 
 class UniquePowersetGeneratorTest extends Specification {
 
