@@ -25,16 +25,21 @@ public class IslandCounter {
     }
 
     private void visitEntireIsland(char[][] grid, boolean[][] visitedLands, int row, int column) {
-        if (row < 0 || row > grid.length - 1 || column < 0 || column > grid[0].length - 1 || visitedLands[row][column])
-            return;
+        boolean isBaseCase =
+                row < 0                         // Top edge
+                || row > grid.length - 1        // Bottom edge
+                || column < 0                   // Left edge
+                || column > grid[0].length - 1  // Right edge
+                || visitedLands[row][column]    // Already visited
+                || grid[row][column] != LAND;   // Water
 
-        if (grid[row][column] == LAND) {
-            visitedLands[row][column] = true;
-            visitEntireIsland(grid, visitedLands, row + 1, column);
-            visitEntireIsland(grid, visitedLands, row - 1, column);
-            visitEntireIsland(grid, visitedLands, row, column + 1);
-            visitEntireIsland(grid, visitedLands, row, column - 1);
-        }
+        if (isBaseCase) return;
+
+        visitedLands[row][column] = true;
+        visitEntireIsland(grid, visitedLands, row + 1, column);
+        visitEntireIsland(grid, visitedLands, row - 1, column);
+        visitEntireIsland(grid, visitedLands, row, column + 1);
+        visitEntireIsland(grid, visitedLands, row, column - 1);
     }
 
 }
