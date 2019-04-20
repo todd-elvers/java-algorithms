@@ -59,4 +59,14 @@ class MinStackTest extends Specification {
             stack.min() == fifteen
     }
 
+    def "min() can handle negative numbers too"() {
+        given:
+            stack.push(-2)
+            stack.push(0)
+            stack.push(-1)
+
+        expect:
+            stack.min() == -2
+    }
+
 }
