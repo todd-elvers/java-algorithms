@@ -1,8 +1,7 @@
 package te.interview.prep;
 
 /**
- * @see <a href="https://leetcode.com/problems/number-of-islands/submissions/">Problem on
- * leetcode</a>
+ * @see <a href="https://leetcode.com/problems/number-of-islands/submissions/">Problem on leetcode</a>
  */
 public class IslandCounter {
     private static final char LAND = '1';
@@ -26,12 +25,12 @@ public class IslandCounter {
 
     private void visitEntireIsland(char[][] grid, boolean[][] visitedLands, int row, int column) {
         boolean isBaseCase =
-                row < 0                         // Top edge
-                || row > grid.length - 1        // Bottom edge
-                || column < 0                   // Left edge
-                || column > grid[0].length - 1  // Right edge
-                || visitedLands[row][column]    // Already visited
-                || grid[row][column] != LAND;   // Water
+                row < 0                                 // Top edge
+                        || row > grid.length - 1        // Bottom edge
+                        || column < 0                   // Left edge
+                        || column > grid[0].length - 1  // Right edge
+                        || visitedLands[row][column]    // Already visited
+                        || grid[row][column] != LAND;   // Water
 
         if (isBaseCase) return;
 
