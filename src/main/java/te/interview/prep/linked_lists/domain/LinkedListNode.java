@@ -38,6 +38,8 @@ public class LinkedListNode {
 
     @Override
     public boolean equals(Object obj) {
+        if(!(obj instanceof LinkedListNode)) return false;
+
         return this.toString().equals(obj.toString());
     }
 }
