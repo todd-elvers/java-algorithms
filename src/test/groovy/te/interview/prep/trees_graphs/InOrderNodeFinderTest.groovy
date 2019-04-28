@@ -1,8 +1,5 @@
 package te.interview.prep.trees_graphs
 
-import spock.lang.Specification
-import te.interview.prep.trees_graphs.domain.TreeNode
-
 class InOrderNodeFinderTest extends TreeTest {
 
     InOrderNodeFinder nodeFinder = []
