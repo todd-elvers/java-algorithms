@@ -3,17 +3,17 @@ package te.interview.prep
 import spock.lang.Specification
 import spock.lang.Subject
 
-class MeetingRoomCounterTest extends Specification {
+class MinMeetingRoomCounterTest extends Specification {
 
     @Subject
-    MeetingRoomCounter meetingRoomCounter = []
+    MinMeetingRoomCounter minMeetingRoomCounter = []
 
-    def "can determine the minimum number of meeting rooms required"(int[][] input, int minimumMeetingRoomCount) {
+    def "can determine the minimum number of meeting rooms required"(int[][] meetingTimes, int minimumMeetingRoomCount) {
         expect:
-            meetingRoomCounter.minMeetingRooms(input) == minimumMeetingRoomCount
+            minMeetingRoomCounter.count(meetingTimes) == minimumMeetingRoomCount
 
         where:
-            input                                                   || minimumMeetingRoomCount
+            meetingTimes                                                   || minimumMeetingRoomCount
             null                                                    || 0
             []                                                      || 0
             [[2, 11], [6, 16], [11, 16]]                            || 2

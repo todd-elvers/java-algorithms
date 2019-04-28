@@ -7,12 +7,12 @@ import java.util.PriorityQueue;
 /**
  * @see <a href="https://leetcode.com/problems/meeting-rooms-ii/">Problem on leetcode</a>
  */
-public class MeetingRoomCounter {
+public class MinMeetingRoomCounter {
 
-    public int minMeetingRooms(int[][] meetingTimes) {
+    public int count(int[][] meetingTimes) {
         if (meetingTimes == null || meetingTimes.length == 0) return 0;
 
-        sortByStartTime(meetingTimes);
+        sortByStartTimesAscending(meetingTimes);
 
         PriorityQueue<Integer> meetingEndTimes = new PriorityQueue<>();
         for (int[] nextMeetingTime : meetingTimes) {
@@ -36,7 +36,7 @@ public class MeetingRoomCounter {
         return !meetingEndTimes.isEmpty() && meetingEndTimes.peek() <= nextMeetingStartTime;
     }
 
-    private void sortByStartTime(int[][] meetingTimes) {
+    private void sortByStartTimesAscending(int[][] meetingTimes) {
         Arrays.sort(meetingTimes, Comparator.comparingInt(meetingTime -> meetingTime[0]));
     }
 }
