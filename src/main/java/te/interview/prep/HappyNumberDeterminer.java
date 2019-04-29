@@ -3,7 +3,7 @@ package te.interview.prep;
 import java.util.HashSet;
 
 /**
- * @see <a href="https://leetcode.com/problems/happy-number/">Happy Number Problem</a>
+ * @see <a href="https://leetcode.com/problems/happy-number/">Problem on leetcode</a>
  */
 public class HappyNumberDeterminer {
 
