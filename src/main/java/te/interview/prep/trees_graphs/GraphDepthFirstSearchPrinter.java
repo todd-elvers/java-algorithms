@@ -4,7 +4,7 @@ import te.interview.prep.trees_graphs.domain.Graph;
 import te.interview.prep.trees_graphs.domain.GraphNode;
 
 /**
- * TODO: Come back to me, didn't quite get it (base case caught me)
+ * TODO: Review, didn't quite get it (base case caught me)
  */
 public class GraphDepthFirstSearchPrinter {
 

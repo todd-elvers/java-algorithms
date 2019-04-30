@@ -9,7 +9,7 @@ public class StackSorter {
         BasicStack<Integer> sorted = new BasicStack<>();
         sorted.push(unsorted.pop());
 
-        //TODO: Figure out why this works - it's better than my solution or the book's
+        //TODO: Review & figure out why this works - it's better than my solution or the book's
         while(!unsorted.isEmpty()) {
             Integer item = unsorted.pop();
 
