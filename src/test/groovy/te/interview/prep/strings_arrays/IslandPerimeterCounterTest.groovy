@@ -1,7 +1,8 @@
-package te.interview.prep
+package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
 import spock.lang.Subject
+import te.interview.prep.strings_arrays.IslandPerimeterCounter
 
 class IslandPerimeterCounterTest extends Specification {
 

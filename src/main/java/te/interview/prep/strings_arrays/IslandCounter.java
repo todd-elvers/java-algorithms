@@ -1,4 +1,4 @@
-package te.interview.prep;
+package te.interview.prep.strings_arrays;
 
 /**
  * @see <a href="https://leetcode.com/problems/number-of-islands/submissions/">Problem on leetcode</a>

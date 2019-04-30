@@ -1,4 +1,4 @@
-package te.interview.prep;
+package te.interview.prep.strings_arrays;
 
 import java.util.Arrays;
 import java.util.Comparator;

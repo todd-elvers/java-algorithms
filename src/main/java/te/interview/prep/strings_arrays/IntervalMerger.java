@@ -1,4 +1,4 @@
-package te.interview.prep;
+package te.interview.prep.strings_arrays;
 
 import java.util.ArrayList;
 import java.util.Arrays;
