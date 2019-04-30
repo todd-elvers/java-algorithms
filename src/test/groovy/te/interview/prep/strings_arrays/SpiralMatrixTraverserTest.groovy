@@ -1,5 +1,6 @@
 package te.interview.prep.strings_arrays
 
+import groovy.transform.NotYetImplemented
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -8,6 +9,7 @@ class SpiralMatrixTraverserTest extends Specification {
     @Subject
     SpiralMatrixTraverser spiralMatrixTraverser = []
 
+    @NotYetImplemented
     def "can traverse a matrix in spiral order"(int[][] matrix, List<Integer> spiralOrder) {
         expect:
             spiralMatrixTraverser.traverse(matrix) == spiralOrder
