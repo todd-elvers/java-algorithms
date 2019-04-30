@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * @see <a href="https://leetcode.com/problems/diagonal-traverse/">Problem on leetcode</a>
  */
-public class DiagonalMatrixOrderFinder {
+public class DiagonalMatrixTraverser {
 
-    public int[] findDiagonalOrder(int[][] matrix) {
+    public int[] traverse(int[][] matrix) {
         if(matrix == null || matrix.length == 0) return new int[0];
 
         List<Integer> results = new ArrayList<>();

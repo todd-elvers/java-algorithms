@@ -2,16 +2,15 @@ package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
 import spock.lang.Subject
-import te.interview.prep.strings_arrays.DiagonalMatrixOrderFinder
 
-class DiagonalMatrixOrderFinderTest extends Specification {
+class DiagonalMatrixTraverserTest extends Specification {
 
     @Subject
-    DiagonalMatrixOrderFinder diagonalMatrixOrderFinder = []
+    DiagonalMatrixTraverser diagonalMatrixTraverser = []
 
     def "can traverse a matrix diagonally"(int[][] matrix, int[] result) {
         expect:
-            diagonalMatrixOrderFinder.findDiagonalOrder(matrix) == result
+            diagonalMatrixTraverser.traverse(matrix) == result
 
         where:
             matrix                            || result
