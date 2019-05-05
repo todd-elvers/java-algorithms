@@ -19,10 +19,9 @@ class PowerOfTwoDeterminerTest extends Specification {
             16          || true
             256         || true
             218         || false
+            536870912   || true
             -2147483648 || false
             -1          || false
-
-
     }
 
 }
