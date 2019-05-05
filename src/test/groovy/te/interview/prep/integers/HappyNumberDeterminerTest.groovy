@@ -1,6 +1,7 @@
-package te.interview.prep
+package te.interview.prep.integers
 
 import spock.lang.Specification
+import te.interview.prep.integers.HappyNumberDeterminer
 
 class HappyNumberDeterminerTest extends Specification {
 
