@@ -10,12 +10,13 @@ public class PowerOfFourDeterminer {
     }
 
     /**
-     *  Since our input is integers, (base^y = x) will only be possible when `y`
-     *  is a whole number. This, along with the fact that (log[b]x = y) and (b^y = x)
-     *  are equivalent, means checking whether `x` is a power of `base` reduces to
-     *  checking whether (log[base]x) results in a whole number.
+     *  For `x` to be a power of `base` there must exist some whole number `y`
+     *  that we can use to satisfy (base^y = x).  To derive `y` we can use
+     *  (log[base]x = y) since it is equivalent.  Once we have derived `y`
+     *  we simply check that it is a whole number and, if it is, then `x`
+     *  is a power of `base`.
      *
-     *  Formula for converting log[10]x to log[base]x:
+     *  Java provides log[10] so we use the following formula to convert to log[base]:
      *
      *                  log[a]x
      *      log[b]x = ---------
