@@ -19,7 +19,7 @@ public class PowerOfThreeDeterminer {
      *
      *                  log[a]x
      *      log[b]x = ---------
-     *                 log[a]b
+     *                  log[a]b
      *
      * @return whether x is a power of base
      */
