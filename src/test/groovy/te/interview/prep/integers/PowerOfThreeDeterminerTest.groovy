@@ -8,7 +8,7 @@ class PowerOfThreeDeterminerTest extends Specification {
     @Subject
     PowerOfThreeDeterminer powerOfThreeDeterminer = []
 
-    def "can determine if a number is a power of two"(int n, boolean isPowerOfThree) {
+    def "can determine if a number is a power of three"(int n, boolean isPowerOfThree) {
         expect:
             powerOfThreeDeterminer.isPowerOfThree(n) == isPowerOfThree
 
