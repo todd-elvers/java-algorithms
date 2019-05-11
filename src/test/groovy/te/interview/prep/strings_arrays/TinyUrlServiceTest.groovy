@@ -9,7 +9,6 @@ class TinyUrlServiceTest extends Specification {
     @Subject
     TinyUrlService tinyUrlService = []
 
-    @NotYetImplemented
     def "can encode and decode urls to/from tiny urls"() {
         expect:
             tinyUrlService.decode(tinyUrlService.encode(url)) == url
