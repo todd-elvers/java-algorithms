@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class GameOfLifeStateGenerator {
 
+    // Time: O(n+m) Space: O(n+m)
+    // Trick: don't update state while processing grid, find all state changes & apply them at once
     public void generateNextState(int[][] grid) {
         if (grid == null || grid.length == 0 || grid[0].length == 0) return;
 
