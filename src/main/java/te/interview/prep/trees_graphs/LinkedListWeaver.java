@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * 4.9 Helper function for determining all possible permutations of input for a BST
- * //TODO: Review, recursion was complicated here since we had to undo our changes to the input args
+ * //TODO: Review this, recursion was complicated here since we had to undo our changes to the input args
  */
 public class LinkedListWeaver {
 

@@ -74,7 +74,6 @@ public class SumPathCounter {
             if(runningSum == targetSum) totalPaths++;
 
             /* Increment pathCount as we recurse, then undo our increment afterwords */
-            //TODO: Use Debugger to find out exactly why we increment and then later decrement pathCount[runningSum]
             updatePathCount(pathCount, runningSum, 1);
             totalPaths += countPathsWithSum(node.left, targetSum, runningSum, pathCount);
             totalPaths += countPathsWithSum(node.right, targetSum, runningSum, pathCount);

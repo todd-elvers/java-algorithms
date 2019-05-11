@@ -4,7 +4,7 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 
 /**
  * 4.10 Checking if t2 is a subtree of t1
- * //TODO: Review, got very close to this answer - did one recursive algorithm instead of two
+ * //TODO: Review this, got very close to this answer - did one recursive algorithm instead of two
  */
 public class SubtreeChecker {
 

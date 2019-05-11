@@ -8,7 +8,7 @@ import te.interview.prep.trees_graphs.domain.TreeNode;
 
 /**
  * 4.9 Generate all possible permutations of input for a BST
- * //TODO: Review, the recursion is a little tricky here too
+ * //TODO: Review this, the recursion is a little tricky here too
  */
 public class BSTInputPermutationGenerator {
 

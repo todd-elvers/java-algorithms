@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * 4.11 Custom BST that can return random node in tree, with all nodes having equal chance.
- * //TODO: Review, try and implement this again without looking at the code.
+ * //TODO: Review this, try and implement this again without looking at the code.
  */
 public class ChildAwareTreeNode {
 
