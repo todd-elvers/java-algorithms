@@ -1,6 +1,5 @@
 package te.interview.prep.strings_arrays
 
-import groovy.transform.NotYetImplemented
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -9,7 +8,6 @@ class GameOfLifeStateGeneratorTest extends Specification {
     @Subject
     GameOfLifeStateGenerator gameOfLifeStateGenerator = []
 
-    @NotYetImplemented
     def "can generate the next state given some existing state"(int[][] board, int[][] nextState) {
         when:
             gameOfLifeStateGenerator.generateNextState(board)
