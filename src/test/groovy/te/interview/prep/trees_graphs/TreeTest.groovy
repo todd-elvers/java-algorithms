@@ -70,28 +70,7 @@ abstract class TreeTest extends Specification {
     TreeNode generateTree(List<Integer> integers) {
         if(integers.isEmpty()) return null
 
-        LinkedList<Integer> intQueue = new LinkedList<>(integers)
-        LinkedList<TreeNode> nodeQueue = new LinkedList<>()
-
-        TreeNode root = new TreeNode(intQueue.removeFirst())
-        nodeQueue.addLast(root)
-
-        while(!intQueue.isEmpty()) {
-            TreeNode node = nodeQueue.removeFirst()
-            node.left = makeTreeNode(intQueue)
-            nodeQueue.addLast(node.left)
-            node.right = makeTreeNode(intQueue)
-            nodeQueue.addLast(node.right)
-        }
-
-        return root
-    }
-
-    private static TreeNode makeTreeNode(LinkedList<Integer> queue) {
-        if(queue.isEmpty()) return null
-
-        Integer integer = queue.removeFirst()
-        return integer == null ? null : new TreeNode(integer)
+        return new BinaryTreeSerializationService().deserialize(integers.join(","))
     }
 
 }
