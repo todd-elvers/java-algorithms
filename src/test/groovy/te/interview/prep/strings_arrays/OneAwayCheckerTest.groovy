@@ -1,13 +1,16 @@
 package te.interview.prep.strings_arrays
 
 import spock.lang.Specification
+import spock.lang.Subject
+import spock.lang.Unroll
 
 class OneAwayCheckerTest extends Specification {
 
+    @Subject
     OneAwayChecker checker = []
 
-    @SuppressWarnings("GroovyPointlessBoolean")
-    def "can determine if one string is 1 or 0 edits away from another"() {
+    @Unroll
+    def "returns #expectedResult for '#str1' and '#str2'"() {
         expect:
             checker.isOneAway(str1, str2) == expectedResult
 
@@ -19,4 +22,5 @@ class OneAwayCheckerTest extends Specification {
             "pale"  | "bake" || false
             "pale"  | "ba"   || false
     }
+
 }
