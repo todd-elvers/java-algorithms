@@ -16,7 +16,7 @@ public class MinMeetingRoomCounter {
 
         PriorityQueue<Integer> meetingEndTimes = new PriorityQueue<>();
         for (int[] nextMeetingTime : meetingTimes) {
-            if (canReuseAnExistingMeetingRoom(meetingEndTimes, nextMeetingTime[0])) {
+            if (doesCurrentMeetingEndBeforeNextMeetingStarts(meetingEndTimes, nextMeetingTime[0])) {
                 meetingEndTimes.poll();
             }
 
@@ -32,7 +32,7 @@ public class MinMeetingRoomCounter {
      *
      * @return true if the room of the latest meeting to end
      */
-    private boolean canReuseAnExistingMeetingRoom(PriorityQueue<Integer> meetingEndTimes, int nextMeetingStartTime) {
+    private boolean doesCurrentMeetingEndBeforeNextMeetingStarts(PriorityQueue<Integer> meetingEndTimes, int nextMeetingStartTime) {
         return !meetingEndTimes.isEmpty() && meetingEndTimes.peek() <= nextMeetingStartTime;
     }
 
