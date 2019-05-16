@@ -12,6 +12,7 @@ public class BSTIterator {
     private TreeNode previous;
     private Stack<TreeNode> parents;
 
+    // Time: O(log n), Space: O(log n)
     public BSTIterator(TreeNode root) {
         this.previous = null;
         this.parents = new Stack<>();
