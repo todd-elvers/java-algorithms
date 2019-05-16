@@ -3,6 +3,7 @@ package te.interview.prep.strings_arrays;
 /**
  * @see <a href="https://leetcode.com/problems/first-unique-character-in-a-string/">Problem on leetcode</a>
  */
+//TODO: Review and find out why this is so fast
 public class FirstUniqueCharacterFinder {
     private static final int NO_UNIQUE_CHARS_FOUND = -1;
 
