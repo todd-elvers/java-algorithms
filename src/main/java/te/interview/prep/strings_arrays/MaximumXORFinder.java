@@ -7,6 +7,7 @@ import java.util.Set;
  * @see <a href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/">Problem on
  * leetcode</a>
  */
+// TODO: Review this and see if I can come up with the bit-manipulation solution on my own
 public class MaximumXORFinder {
 
     // Time: O(n^2), Space: O(1)
