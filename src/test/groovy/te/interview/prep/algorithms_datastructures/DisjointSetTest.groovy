@@ -85,9 +85,12 @@ class DisjointSetTest extends Specification {
             set.findSet(4) == null
     }
 
-    def "trying to remove nodes that don't exist does nothing"() {
+    def "trying to remove or union nodes that don't exist does nothing"() {
         when:
             set.removeSet(99999)
+            set.union(99999, 2)
+            set.union(2, 99999)
+            set.union(null, null)
 
         then:
             noExceptionThrown()
