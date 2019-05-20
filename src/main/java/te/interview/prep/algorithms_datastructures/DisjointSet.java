@@ -1,4 +1,4 @@
-package te.interview.prep.sorting;
+package te.interview.prep.algorithms_datastructures;
 
 import java.util.ArrayList;
 import java.util.Collection;
