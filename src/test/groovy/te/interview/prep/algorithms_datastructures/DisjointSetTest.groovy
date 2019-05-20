@@ -8,11 +8,6 @@ class DisjointSetTest extends Specification {
     @Subject
     DisjointSet<Integer> set = new DisjointSet<>([0, 1, 2, 3, 4])
 
-    def "can convert the set to a list"() {
-        expect:
-            set.toList() == [0, 1, 2, 3, 4]
-    }
-
     def "can determine if two values are disjoint or not"() {
         when: 'we put 0 and 2 in the same set'
             set.union(0, 2)
@@ -24,41 +19,44 @@ class DisjointSetTest extends Specification {
             set.union(3, 1)
 
         then: '4, 2, and 0 all belong to the same set'
-            set.findSet(0) != null
-            set.findSet(2) != null
-            set.findSet(4) != null
+            set.isSameSet(0, 2)
+            set.isSameSet(4, 2)
+            set.isSameSet(4, 0)
 
-            set.findSet(0) == set.findSet(2)
-            set.findSet(4) == set.findSet(2)
-            set.findSet(4) == set.findSet(0)
+            set.isSameSet(2, 0)
+            set.isSameSet(2, 4)
+            set.isSameSet(0, 4)
 
-            set.findSet(2) == set.findSet(0)
-            set.findSet(2) == set.findSet(4)
-            set.findSet(0) == set.findSet(4)
-
-            set.findSet(2) == set.findSet(2)
-            set.findSet(4) == set.findSet(4)
-            set.findSet(0) == set.findSet(0)
+            set.isSameSet(2, 2)
+            set.isSameSet(4, 4)
+            set.isSameSet(0, 0)
 
         and: '3 and 1 all belong to the same set'
-            set.findSet(3) != null
-            set.findSet(1) != null
+            set.isSameSet(3, 1)
+            set.isSameSet(1, 3)
 
-            set.findSet(3) == set.findSet(1)
-            set.findSet(1) == set.findSet(3)
-
-            set.findSet(1) == set.findSet(1)
-            set.findSet(3) == set.findSet(3)
+            set.isSameSet(1, 1)
+            set.isSameSet(3, 3)
 
         and: '3 and [4, 2, 0] are disjoint'
-            set.findSet(3) != set.findSet(4)
-            set.findSet(3) != set.findSet(2)
-            set.findSet(3) != set.findSet(0)
+            set.isDisjoint(3, 4)
+            set.isDisjoint(3, 2)
+            set.isDisjoint(3, 0)
 
         and: '1 and [4, 2, 0] are disjoint'
-            set.findSet(1) != set.findSet(4)
-            set.findSet(1) != set.findSet(2)
-            set.findSet(1) != set.findSet(0)
+            set.isDisjoint(1, 4)
+            set.isDisjoint(1, 2)
+            set.isDisjoint(1, 0)
+    }
+
+    def "can convert the set to a list"() {
+        expect:
+            set.toList() == [0, 1, 2, 3, 4]
+    }
+
+    def "nonexistent values are disjoint"() {
+        expect:
+            set.isDisjoint(null, null)
     }
 
     def "can remove all elements from a set"() {
@@ -75,9 +73,7 @@ class DisjointSetTest extends Specification {
             set.removeSet(2)
 
         then: '3 and 1 are still in their set'
-            set.findSet(3) != null
-            set.findSet(1) != null
-            set.findSet(3) == set.findSet(1)
+            set.isSameSet(3, 1)
 
         and: '0, 2, and 4 no longer belong to a set'
             set.findSet(0) == null

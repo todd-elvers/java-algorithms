@@ -75,24 +75,40 @@ public class DisjointSet<T> {
      * Has no effect if either x or y are not in any set or are already in the same set.
      */
     public void union(T x, T y) {
-        T valueX = findSet(x);
-        T valueY = findSet(y);
+        T repX = findSet(x);
+        T repY = findSet(y);
 
-        if (valueX == null || valueY == null || Objects.equals(x, y)) return;
+        if (repX == null || repY == null || Objects.equals(x, y)) return;
 
-        unionByRank(valuesToNodes.get(valueX), valuesToNodes.get(valueY));
+        unionByRank(valuesToNodes.get(repX), valuesToNodes.get(repY));
     }
 
-    private void unionByRank(Node<T> nodeX, Node<T> nodeY) {
-        if (nodeX.rank < nodeY.rank) {
-            nodeX.parent = nodeY;
+    private void unionByRank(Node<T> repNodeX, Node<T> repNodeY) {
+        if (repNodeX.rank < repNodeY.rank) {
+            repNodeX.parent = repNodeY;
         } else {
-            nodeY.parent = nodeX;
+            repNodeY.parent = repNodeX;
 
-            if (nodeY.rank == nodeX.rank) {
-                nodeY.rank++;
+            if (repNodeY.rank == repNodeX.rank) {
+                repNodeY.rank++;
             }
         }
+    }
+
+    /**
+     * @return true if, and only if, both values belong to a set and it's the same set.
+     */
+    public boolean isSameSet(T x, T y) {
+        T setRepX = findSet(x), setRepY = findSet(y);
+        return (setRepX != null && setRepY != null) && Objects.equals(setRepX, setRepY);
+    }
+
+    /**
+     * @return true if either value is not in a set or both are different sets.
+     */
+    public boolean isDisjoint(T x, T y) {
+        T setRepX = findSet(x), setRepY = findSet(y);
+        return (setRepX == null || setRepY == null) || !Objects.equals(setRepX, setRepY);
     }
 
     /**
