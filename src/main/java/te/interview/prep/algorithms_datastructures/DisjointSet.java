@@ -38,7 +38,7 @@ public class DisjointSet<T> {
     private Node<T> findWithPathCompression(Node<T> node) {
         if (node == null) return null;
 
-        // Path compression: flatten each parent tree to a constant depth
+        // Path compression: flatten each parent tree to a constant depth (i.e. update parent ref to set rep.)
         if (node != node.parent) {
             node.parent = findWithPathCompression(node.parent);
         }
