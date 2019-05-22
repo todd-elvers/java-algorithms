@@ -7,7 +7,7 @@ package te.interview.prep.strings_arrays;
 public class FirstUniqueCharacterFinder {
     private static final int NO_UNIQUE_CHARS_FOUND = -1;
 
-    // Time: O(1), Space: O(1)
+    // Time: O(?), Space: O(1)
     public int firstUniqChar(String str) {
         if (str == null || str.isEmpty()) return NO_UNIQUE_CHARS_FOUND;
 
