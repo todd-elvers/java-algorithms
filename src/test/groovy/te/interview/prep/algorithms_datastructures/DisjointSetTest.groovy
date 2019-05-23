@@ -49,11 +49,6 @@ class DisjointSetTest extends Specification {
             set.isDisjoint(1, 0)
     }
 
-    def "can convert the set to a list"() {
-        expect:
-            set.toList() == [0, 1, 2, 3, 4]
-    }
-
     def "nonexistent values are disjoint"() {
         expect:
             set.isDisjoint(null, null)

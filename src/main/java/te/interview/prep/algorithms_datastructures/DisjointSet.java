@@ -1,12 +1,9 @@
 package te.interview.prep.algorithms_datastructures;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Generic Disjoint Set implementation that uses union-by-rank and path
@@ -29,10 +26,7 @@ public class DisjointSet<T> {
      */
     public T findSet(T value) {
         Node<T> setRepresentative = findWithPathCompression(valuesToNodes.get(value));
-
-        return Optional.ofNullable(setRepresentative)
-                .map(set -> set.value)
-                .orElse(null);
+        return (setRepresentative == null) ? null : setRepresentative.value;
     }
 
     private Node<T> findWithPathCompression(Node<T> node) {
@@ -51,23 +45,16 @@ public class DisjointSet<T> {
      * Has no effect if the given value does not belong to any set.
      */
     public void removeSet(T value) {
-        Optional.ofNullable(findSet(value))
-                .ifPresent(set -> {
-                    // Remove all elements pointing to set representative
-                    valuesToNodes.keySet().removeIf(node ->
-                            !Objects.equals(node, set) && Objects.equals(findSet(node), set)
-                    );
+        T set = findSet(value);
+        if(set == null) return;
 
-                    // Remove set representative
-                    valuesToNodes.remove(set);
-                });
-    }
+        // Remove all elements pointing to set representative
+        valuesToNodes.keySet().removeIf(node ->
+                !Objects.equals(node, set) && Objects.equals(findSet(node), set)
+        );
 
-    /**
-     * @return all nodes in the disjoint set as a list
-     */
-    public List<T> toList() {
-        return new ArrayList<>(valuesToNodes.keySet());
+        // Remove set representative
+        valuesToNodes.remove(set);
     }
 
     /**
@@ -80,10 +67,9 @@ public class DisjointSet<T> {
 
         if (repX == null || repY == null || Objects.equals(x, y)) return;
 
-        unionByRank(valuesToNodes.get(repX), valuesToNodes.get(repY));
-    }
+        Node<T> repNodeX = valuesToNodes.get(repX);
+        Node<T> repNodeY = valuesToNodes.get(repY);
 
-    private void unionByRank(Node<T> repNodeX, Node<T> repNodeY) {
         if (repNodeX.rank < repNodeY.rank) {
             repNodeX.parent = repNodeY;
         } else {
