@@ -81,5 +81,21 @@ public class OptimizedTrie {
         Node getChild(char c) { return children[toIndex(c)]; }
         int toIndex(char c) { return c - 'a'; }
         boolean isChildless() { return Arrays.stream(children).noneMatch(Objects::nonNull); }
+
+        // Kept for future debugging purposes
+        private void printTrie(Node node, char c, int offset, String prefix) {
+            StringBuilder padding = new StringBuilder();
+            for(int i = 0; i < offset; i++) padding.append(" ");
+            System.out.print(padding.toString() + (c == ' ' ? "*" : c) + (node.value != null ? " (" + prefix + c + ")" : ""));
+            prefix += c;
+            prefix = prefix.trim();
+            for (int i = 0; i < node.children.length; i++) {
+                Node child = node.children[i];
+                if (child == null) continue;
+                char ch = (char) (i + 'a');
+                System.out.println();
+                printTrie(child, ch, offset + 2, prefix);
+            }
+        }
     }
 }
