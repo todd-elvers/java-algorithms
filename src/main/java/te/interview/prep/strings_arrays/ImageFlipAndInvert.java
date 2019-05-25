@@ -15,7 +15,7 @@ public class ImageFlipAndInvert {
 
     private void flipAndInvertRow(int[] row) {
         for (int i = 0, j = row.length - 1; i <= j; i++, j--) {
-            // Edge case: only invert once when we land on the middle element
+            // Edge case: only valid operation on the middle element is inversion
             if(i == j) {
                 invertValue(row, i);
             } else {
