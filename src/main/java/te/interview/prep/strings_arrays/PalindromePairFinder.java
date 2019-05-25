@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @see <a href="https://leetcode.com/problems/palindrome-pairs/">Problem on leetcode</a>
  */
+//TODO: Review this later, Trie is useful but it's not immediately obvious why
 public class PalindromePairFinder {
 
     // Time: O(n^2 * k), Space: O(n^2)
@@ -47,79 +47,67 @@ public class PalindromePairFinder {
             // Build Trie of suffixes
             for (int i = 0; i < words.length; i++) addWord(root, words[i], i);
 
-            System.out.println(Arrays.toString(words));
-            root.printTrie(root, '*', 0, "", words);
-            System.out.println();
-
             // Search through the suffixes for palindromes
             for (int i = 0; i < words.length; i++) search(words[i], i, root, results);
 
             return results;
         }
 
-        private void addWord(TrieNode current, String word, int indexOfWord) {
-            System.out.println(word+":");
-            // Walk down the trie in the reverse order of `word`'s characters
+        private void addWord(TrieNode prev, String word, int indexOfWord) {
+            // Add words in reverse order so our trie becomes a set of suffixes
             for (int i = word.length() - 1; i >= 0; i--) {
-                // Fetch the next letter's node (inserting one if null)
-                TrieNode next = current.getChildOrInsertNew(word.charAt(i));
+                TrieNode next = prev.getChild(word.charAt(i));
+                if(next == null) next = prev.setChild(word.charAt(i), new TrieNode());
 
-                // `indexOfLetter` is a potential pair index if word[0..i] is a palindrome
-                System.out.println("\t" + word.charAt(i) + ": " + word + "(" + 0 + ", " + i +") "+ " - " + word.substring(0, i+1) + " - " + isPalindrome(word, 0, i));
+                // Then we'll check for a palindrome left->right while we move right pointer to the left.
+                // e.g. 'abcd', then 'abc', then 'ab', then 'a'
                 if (isPalindrome(word, 0, i)) {
-                    System.out.println("\t\tUpdating letter pointing to '" + word.charAt(i) + "' with reference to " + word + "("+ indexOfWord+")");
-                    current.palindromeIndexes.add(indexOfWord);
+                    // If any of the sub-sequences are a palindrome note it on our `prev` node
+                    prev.palindromeIndexes.add(indexOfWord);
                 }
 
-                current = next;
+                prev = next;
             }
 
-            // Mark `current` node we landed on as a word
-            current.index = indexOfWord;
+            // Mark the last node we land on as a word
+            prev.index = indexOfWord;
         }
 
         private void search(String word, int indexOfWord, TrieNode current, List<List<Integer>> results) {
-            System.out.println("Searching for " + word + "(" + indexOfWord + ")");
             for (int j = 0; j < word.length(); j++) {
-                if(current.isWord()) {
-                    System.out.println("\t" + j + ": (" + current.index + ", " + indexOfWord + ") - " + word + " - " + word.substring(j) + " - " + isPalindrome(word, j, word.length() - 1));
-                }
-
                 // Edge-case: if some node along our current path is the last node for some other word,
                 // see if the remainder of our nodes result in a palindrome.  If they do then the two
                 // words themselves comprise a palindrome and should be added to results
-                if (current.isWord() && current.index != indexOfWord && isPalindrome(word, j, word.length() - 1)) {
+                if (isCurrentNodeDifferentWord(indexOfWord, current) && isPalindrome(word, j, word.length() - 1)) {
                     results.add(Arrays.asList(indexOfWord, current.index));
                 }
 
                 current = current.getChild(word.charAt(j));
 
-                // Part or all of `word` is missing from Trie, halt search
+                // Stop searching if any part of `word` is missing from the trie
                 if (current == null) return;
             }
 
             // Did we end on a node representing some other word?  If so that means the word
             // we landed on is a palindrome of our own word since we added all words right->left
             // but searched for them left->right.
-            System.out.println("Checking if ended on word...");
             if(current.isWord()) {
-                System.out.println("\tYes! Ended on " + current.index + " while traversing for " + word + "(" + indexOfWord + ")");
                 if(indexOfWord != current.index) {
-                    System.out.println("\t\tAdded!");
                     results.add(Arrays.asList(indexOfWord, current.index));
                 }
             }
 
-            // Add all potential pairs indexes, that aren't the index we're currently on, to results
-            System.out.println("Adding all pairs (" + current.palindromeIndexes.size() +"):");
+            // Add all the palindrome indexes for the node we landed on
+            // However don't add them if they point to our word (e.g. single character words)
             for (int j : current.palindromeIndexes) {
-                System.out.println("\tChecking ("+indexOfWord+", "+j+")");
                 if (j != indexOfWord) {
-                    System.out.println("\t\tAdding it!");
                     results.add(Arrays.asList(indexOfWord, j));
                 }
             }
-            System.out.println();
+        }
+
+        private boolean isCurrentNodeDifferentWord(int indexOfWord, TrieNode current) {
+            return current.isWord() && current.index != indexOfWord;
         }
 
         private boolean isPalindrome(String s, int start, int end) {
@@ -138,38 +126,11 @@ public class PalindromePairFinder {
             TrieNode getChild(char c) {
                 return children[toIndex(c)];
             }
-            TrieNode getChildOrInsertNew(char c) {
-                int trieIndex = toIndex(c);
-                if(children[trieIndex] == null) children[trieIndex] = new TrieNode();
-                return children[trieIndex];
+            TrieNode setChild(char c, TrieNode n) {
+                return children[toIndex(c)] = n;
             }
             private int toIndex(char c) {
                 return c - 'a';
-            }
-
-            private void printTrie(TrieNode node, char c, int offset, String prefix, String[] words) {
-                StringBuilder padding = new StringBuilder();
-                for(int i = 0; i < offset; i++) padding.append(" ");
-                String contents = new StringBuilder(" (")
-                    .append(node.index)
-                        .append(", ")
-                        .append("[")
-                        .append(node.palindromeIndexes.stream().map(i -> i+"-"+words[i]).collect(Collectors.joining(",")))
-                        .append("]")
-                        .append(node.index > 0 ? ", " : "")
-                        .append(node.index > 0 ? prefix + c : "")
-                        .append(")")
-                        .toString();
-
-                System.out.print(padding.toString() + c + contents);
-                if(c != '*') prefix += c;
-                for (int i = 0; i < node.children.length; i++) {
-                    TrieNode child = node.children[i];
-                    if (child == null) continue;
-                    char ch = (char) (i + 'a');
-                    System.out.println();
-                    printTrie(child, ch, offset + 2, prefix, words);
-                }
             }
         }
     }
