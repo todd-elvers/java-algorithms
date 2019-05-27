@@ -76,6 +76,16 @@ class LinkedListLoopFinderTest extends Specification {
 
         and: 'that node references the expected space in memory'
             result.get().is(nodeLoopBeginsOn)
+
+        when:
+            result = fastSlowRunnerApproach.findLoop(listWithLoop)
+
+        then: 'we find a node that has the expected data'
+            result.isPresent()
+            result.get().data == nodeLoopBeginsOn.data
+
+        and: 'that node references the expected space in memory'
+            result.get().is(nodeLoopBeginsOn)
     }
 
     private static LoopNode<String> appendToEndOfList(LoopNode<String> head, LoopNode<String> nodeToLoopBackTo) {

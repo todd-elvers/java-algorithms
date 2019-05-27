@@ -13,7 +13,7 @@ import te.interview.prep.linked_lists.domain.LoopNode;
  */
 public class LinkedListLoopFinder {
 
-    // Improved approach - minimal memory usage but cannot handle duplicate nodes
+    // Improved approach
     static class FastSlowRunnerApproach {
         Optional<LoopNode<String>> findLoop(LoopNode<String> head) {
             if(head == null || head.next == null) return Optional.empty();
@@ -38,7 +38,7 @@ public class LinkedListLoopFinder {
         }
     }
 
-    // Naive approach - excess memory used but can handle duplicate nodes
+    // Naive approach
     static class HashMapApproach {
         Optional<LoopNode<String>> findLoop(LoopNode<String> head) {
             Map<String, List<LoopNode>> nodeDataToNodes = new HashMap<>();
