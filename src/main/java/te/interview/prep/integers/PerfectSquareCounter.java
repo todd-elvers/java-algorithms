@@ -58,7 +58,7 @@ public class PerfectSquareCounter {
             return (int) Math.sqrt(n);
         }
 
-        // Values form 4^n(8k+7) cannot be decomposed/reduced past the sum of 4 integers.
+        // Values in the form 4^n(8k+7) cannot be decomposed/reduced past the sum of 4 integers.
         private boolean isSumOfFourIntegers(int n) {
             while (n % 4 == 0) n /= 4;
             return n % 8 == 7;

@@ -16,10 +16,13 @@ public class BarcodeArranger {
     /**
      * Swaps adjacent barcodes that are equal until no two adjacent barcodes are equal.
      *
-     * One call of this method is not always sufficient to correctly rearrange our barcodes, since
-     * some calls result in exhausting the array before the correct number of swaps has been done.
-     * In this scenario we have approximated a rearrangement, so a secondary call to this method is
-     * required to ensure rearrangement occurred completely. (e.g. [2,1,1] -> [1,1,2] -> [1,2,1])
+     * One call of this method is not always sufficient to correctly rearrange our barcodes.  This
+     * scenario usually occurs when we have reached the end of an array of size n and indexes n-1
+     * and n-2 are equal.  In this scenario we then wrap around to the start of the array and look
+     * for the first different value and swap it with index n-1.  This wrapping logic either
+     * completes our rearrangement or moves the values to rearrange to the beginning of the array.
+     * In the case where we merely moved the issue up to the front of the array a secondary call to
+     * this method will complete the rearrangement. (e.g. [2,1,1] -> [1,1,2] -> [1,2,1])
      */
     private void rearrangeBarcodes(int[] barcodes, boolean performSecondRearranging) {
         for (int i = 1; i < barcodes.length; i++) {
