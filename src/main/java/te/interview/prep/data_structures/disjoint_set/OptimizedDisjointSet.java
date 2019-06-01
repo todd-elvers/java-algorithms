@@ -11,7 +11,6 @@ public class OptimizedDisjointSet {
 
         for (int i = 0; i < ints.length; i++) {
             this.parents[i] = ints[i];
-            this.rank[i] = -1;
         }
     }
 
