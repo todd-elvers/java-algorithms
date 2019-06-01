@@ -25,16 +25,21 @@ public class IntegerDisjointSet {
 
     public void union(int x, int y) {
         Integer xSetValue = find(x), ySetValue = find(y);
+
         if (xSetValue == null || ySetValue == null || xSetValue.equals(ySetValue)) return;
-        unionByRank(valueToNode.get(xSetValue), valueToNode.get(ySetValue));
+
+        unionByRank(
+                valueToNode.get(xSetValue),
+                valueToNode.get(ySetValue)
+        );
     }
 
-    private void unionByRank(Node x, Node y) {
-        if (x.rank < y.rank) {
-            x.parent = y;
+    private void unionByRank(Node xSet, Node ySet) {
+        if (xSet.rank < ySet.rank) {
+            xSet.parent = ySet;
         } else {
-            y.parent = x;
-            if (x.rank == y.rank) y.rank++;
+            ySet.parent = xSet;
+            if (xSet.rank == ySet.rank) ySet.rank++;
         }
     }
 

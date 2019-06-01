@@ -22,11 +22,13 @@ public class OptimizedDisjointSet {
     }
 
     public void union(int x, int y) {
-        int xSet = find(x);
-        int ySet = find(y);
-
+        int xSet = find(x), ySet = find(y);
         if (xSet == -1 || ySet == -1 || xSet == ySet) return;
 
+        unionByRank(xSet, ySet);
+    }
+
+    private void unionByRank(int xSet, int ySet) {
         if (rank[xSet] < rank[ySet]) {
             parents[xSet] = ySet;
         } else {
@@ -42,6 +44,7 @@ public class OptimizedDisjointSet {
         int setRepresentative = find(x);
         if (setRepresentative == -1) return;
 
+        // Remove all nodes who's set representative is x
         int indexOfSetRep = -1;
         for (int i = 0; i < parents.length; i++) {
             if (parents[i] != setRepresentative) {
@@ -51,6 +54,7 @@ public class OptimizedDisjointSet {
             }
         }
 
+        // Remove x itself
         parents[indexOfSetRep] = 0;
     }
 }

@@ -63,21 +63,23 @@ public class GenericDisjointSet<T> {
      * Has no effect if either x or y are not in any set or are already in the same set.
      */
     public void union(T x, T y) {
-        T repX = find(x), repY = find(y);
+        T xSetValue = find(x), ySetValue = find(y);
+        if (xSetValue == null || ySetValue == null || Objects.equals(x, y)) return;
 
-        if (repX == null || repY == null || Objects.equals(x, y)) return;
-
-        unionByRank(valuesToNodes.get(repX), valuesToNodes.get(repY));
+        unionByRank(
+                valuesToNodes.get(xSetValue),
+                valuesToNodes.get(ySetValue)
+        );
     }
 
-    private void unionByRank(Node x, Node y) {
-        if (x.rank < y.rank) {
-            x.parent = y;
+    private void unionByRank(Node xSet, Node ySet) {
+        if (xSet.rank < ySet.rank) {
+            xSet.parent = ySet;
         } else {
-            y.parent = x;
+            ySet.parent = xSet;
 
-            if (y.rank == x.rank) {
-                y.rank++;
+            if (ySet.rank == xSet.rank) {
+                ySet.rank++;
             }
         }
     }
