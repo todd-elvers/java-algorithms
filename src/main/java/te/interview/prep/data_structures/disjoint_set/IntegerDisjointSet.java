@@ -1,4 +1,4 @@
-package te.interview.prep.algorithms_datastructures;
+package te.interview.prep.data_structures.disjoint_set;
 
 import java.util.HashMap;
 import java.util.Map;

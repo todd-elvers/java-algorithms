@@ -1,4 +1,4 @@
-package te.interview.prep.algorithms_datastructures;
+package te.interview.prep.algorithms;
 
 public class IntegerBinarySearch {
     private static final int VALUE_NOT_FOUND = -1;

@@ -1,4 +1,4 @@
-package te.interview.prep.algorithms_datastructures;
+package te.interview.prep.data_structures.trie;
 
 import java.util.Arrays;
 import java.util.Objects;

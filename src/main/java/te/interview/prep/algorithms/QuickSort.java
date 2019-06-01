@@ -1,4 +1,4 @@
-package te.interview.prep.algorithms_datastructures;
+package te.interview.prep.algorithms;
 
 public class QuickSort {
 

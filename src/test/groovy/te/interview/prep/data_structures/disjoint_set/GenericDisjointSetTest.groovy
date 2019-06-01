@@ -1,4 +1,4 @@
-package te.interview.prep.algorithms_datastructures
+package te.interview.prep.data_structures.disjoint_set
 
 import spock.lang.Specification
 import spock.lang.Subject

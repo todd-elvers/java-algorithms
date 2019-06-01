@@ -1,9 +1,9 @@
-package te.interview.prep.algorithms_datastructures
+package te.interview.prep.data_structures.trie
 
 import spock.lang.Specification
 import spock.lang.Subject
 
-class TrieTest extends Specification {
+class GeneralTrieOptimizedTrieTest extends Specification {
 
     @Subject
     GeneralTrie generalTrie = []
