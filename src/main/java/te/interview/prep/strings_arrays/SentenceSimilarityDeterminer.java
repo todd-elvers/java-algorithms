@@ -16,7 +16,6 @@ public class SentenceSimilarityDeterminer {
     // Space: O(p)
     public boolean determine(String[] sentence1, String[] sentence2, List<List<String>> pairs) {
         if (sentence1.length != sentence2.length) return false;
-        if (pairs.isEmpty()) return true;
 
         Set<String> pairSet = new HashSet<>();
         for (List<String> pair : pairs) {
