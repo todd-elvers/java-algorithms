@@ -3,10 +3,10 @@ package te.interview.prep.algorithms
 import spock.lang.Specification
 import spock.lang.Subject
 
-class IntegerBinarySearchTest extends Specification {
+class BinarySearchTest extends Specification {
 
     @Subject
-    IntegerBinarySearch algorithm = []
+    BinarySearch algorithm = []
 
     def "can correctly find elements using binary search"(int[] input, int value, int index) {
         expect:

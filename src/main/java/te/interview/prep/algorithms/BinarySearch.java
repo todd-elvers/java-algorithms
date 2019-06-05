@@ -1,6 +1,6 @@
 package te.interview.prep.algorithms;
 
-public class IntegerBinarySearch {
+public class BinarySearch {
     private static final int VALUE_NOT_FOUND = -1;
 
     public int search(int[] sortedArray, int value) {
