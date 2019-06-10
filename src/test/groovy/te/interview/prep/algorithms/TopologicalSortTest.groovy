@@ -2,6 +2,7 @@ package te.interview.prep.algorithms
 
 import spock.lang.Specification
 import spock.lang.Subject
+import te.interview.prep.algorithms.domain.Graph
 
 class TopologicalSortTest extends Specification {
 
@@ -10,16 +11,16 @@ class TopologicalSortTest extends Specification {
 
     def "can topologically sort unweighted DAG"() {
         given: 'a graph and a bunch of vertices'
-            TopologicalSort.Graph g = []
-            def v1 = new TopologicalSort.Vertex('A')
-            def v2 = new TopologicalSort.Vertex('B')
-            def v3 = new TopologicalSort.Vertex('C')
-            def v4 = new TopologicalSort.Vertex('D')
-            def v5 = new TopologicalSort.Vertex('E')
-            def v6 = new TopologicalSort.Vertex('F')
-            def v7 = new TopologicalSort.Vertex('G')
-            def v8 = new TopologicalSort.Vertex('H')
-            def v9 = new TopologicalSort.Vertex('I')
+            Graph g = []
+            def v1 = new Graph.Vertex('A')
+            def v2 = new Graph.Vertex('B')
+            def v3 = new Graph.Vertex('C')
+            def v4 = new Graph.Vertex('D')
+            def v5 = new Graph.Vertex('E')
+            def v6 = new Graph.Vertex('F')
+            def v7 = new Graph.Vertex('G')
+            def v8 = new Graph.Vertex('H')
+            def v9 = new Graph.Vertex('I')
             g.vertices.addAll([v9, v1, v8, v2, v7, v3, v6, v4, v5])
 
         and: 'B -> [C, E]'
@@ -43,16 +44,16 @@ class TopologicalSortTest extends Specification {
 
     def "can find the shortest-path in a weighted DAG"() {
         given: 'a graph and a bunch of vertices'
-            TopologicalSort.Graph g = []
-            def v1 = new TopologicalSort.Vertex('A')
-            def v2 = new TopologicalSort.Vertex('B')
-            def v3 = new TopologicalSort.Vertex('C')
-            def v4 = new TopologicalSort.Vertex('D')
-            def v5 = new TopologicalSort.Vertex('E')
-            def v6 = new TopologicalSort.Vertex('F')
-            def v7 = new TopologicalSort.Vertex('G')
-            def v8 = new TopologicalSort.Vertex('H')
-            def v9 = new TopologicalSort.Vertex('I')
+            Graph g = []
+            def v1 = new Graph.Vertex('A')
+            def v2 = new Graph.Vertex('B')
+            def v3 = new Graph.Vertex('C')
+            def v4 = new Graph.Vertex('D')
+            def v5 = new Graph.Vertex('E')
+            def v6 = new Graph.Vertex('F')
+            def v7 = new Graph.Vertex('G')
+            def v8 = new Graph.Vertex('H')
+            def v9 = new Graph.Vertex('I')
             g.vertices.addAll([v9, v1, v8, v2, v7, v3, v6, v4, v5])
 
         and: 'B -> [C(15), E(2)]'

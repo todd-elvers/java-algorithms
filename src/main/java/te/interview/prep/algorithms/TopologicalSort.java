@@ -5,23 +5,24 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
+import te.interview.prep.algorithms.domain.Graph;
 
 public class TopologicalSort {
 
-    public List<Vertex> sort(Graph g) {
+    public List<Graph.Vertex> sort(Graph g) {
         // Count the number of incoming edges to each vertex
-        Map<Vertex, Integer> inboundEdgeCounts = new HashMap<>();
-        for (Vertex v : g.vertices) {
+        Map<te.interview.prep.algorithms.domain.Graph.Vertex, Integer> inboundEdgeCounts = new HashMap<>();
+        for (te.interview.prep.algorithms.domain.Graph.Vertex v : g.vertices) {
             inboundEdgeCounts.putIfAbsent(v, 0);
-            for (Vertex u : v.vertices) {
+            for (Graph.Vertex u : v.vertices) {
                 inboundEdgeCounts.put(u, inboundEdgeCounts.getOrDefault(u, 0) + 1);
             }
         }
 
         // Queue up all vertices with no incoming edges
-        LinkedList<Vertex> queue = new LinkedList<>();
-        for (Map.Entry<Vertex, Integer> entry : inboundEdgeCounts.entrySet()) {
+        LinkedList<Graph.Vertex> queue = new LinkedList<>();
+        for (Map.Entry<Graph.Vertex, Integer> entry : inboundEdgeCounts.entrySet()) {
             if (entry.getValue() == 0) {
                 queue.addLast(entry.getKey());
             }
@@ -29,10 +30,10 @@ public class TopologicalSort {
 
         // Process all vertices with no inbound edges, decrementing the inbound edges of
         // all neighboring vertices and adding them to the queue if their inbound count is 0
-        List<Vertex> result = new ArrayList<>();
+        List<Graph.Vertex> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            Vertex v = queue.removeFirst();
-            for (Vertex u : v.vertices) {
+            Graph.Vertex v = queue.removeFirst();
+            for (Graph.Vertex u : v.vertices) {
                 int newEdgeCount = inboundEdgeCounts.compute(u, (vertex, count) -> count - 1);
                 if (newEdgeCount == 0) {
                     queue.addLast(u);
@@ -45,62 +46,29 @@ public class TopologicalSort {
         return result;
     }
 
-    public Map<Vertex, Integer> findShortestPathsToAllOtherVertices(Graph g, Vertex source) {
-        List<Vertex> sorted = sort(g);
+    public Map<Graph.Vertex, Integer> findShortestPathsToAllOtherVertices(Graph g, Graph.Vertex source) {
+        List<Graph.Vertex> sorted = sort(g);
 
         // Initialize distance to all nodes from source as infinity (except for source)
-        Map<Vertex, Integer> distanceFromSource = new HashMap<>(sorted.size());
-        for(Vertex v : sorted) distanceFromSource.put(v, Integer.MAX_VALUE);
+        Map<Graph.Vertex, Integer> distanceFromSource = new HashMap<>(sorted.size());
+        for (Graph.Vertex v : sorted) distanceFromSource.put(v, Integer.MAX_VALUE);
         distanceFromSource.put(source, 0);
 
-        for (Vertex u : sorted) {
+        for (Graph.Vertex u : sorted) {
             // All nodes prior to `source` will remain infinitely far away
-            if(distanceFromSource.get(u) == Integer.MAX_VALUE) continue;
+            if (distanceFromSource.get(u) == Integer.MAX_VALUE) continue;
 
-            for (Vertex v : u.vertices) {
+            for (Graph.Vertex v : u.vertices) {
                 // Update our shortest path estimate if our previous source -> v
                 // estimate is more expensive than our current source -> v estimate
                 int pathCost = distanceFromSource.get(u) + u.edgeWeights.get(v);
-                if(distanceFromSource.get(v) > pathCost) {
+                if (distanceFromSource.get(v) > pathCost) {
                     distanceFromSource.put(v, pathCost);
                 }
             }
         }
 
         return distanceFromSource;
-    }
-
-
-    protected static class Graph {
-        List<Vertex> vertices = new ArrayList<>();
-    }
-
-    protected static class Vertex {
-        List<Vertex> vertices = new ArrayList<>();
-        Map<Vertex, Integer> edgeWeights = new HashMap<>();
-        String name;
-
-        public Vertex(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Vertex)) return false;
-            Vertex vertex = (Vertex) o;
-            return name.equals(vertex.name);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(name);
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
     }
 
 }
