@@ -38,6 +38,11 @@ class DijkstraAlgorithmTest extends Specification {
 
         expect:
             algorithm.findShortestPath(graph, a, i) == ['A', 'C', 'D', 'G', 'I']
+            algorithm.findShortestPath(graph, a, h) == ['A', 'C', 'D', 'H']
+            algorithm.findShortestPath(graph, a, f) == ['A', 'C', 'D', 'H', 'F']
+            algorithm.findShortestPath(graph, a, e) == ['A', 'E']
+            algorithm.findShortestPath(graph, a, b) == ['A', 'C', 'B']
+            algorithm.findShortestPath(graph, e, i) == ['E', 'I']
     }
 
     private static void addEdgesToVertex(Graph.Vertex vertex, Map<Graph.Vertex, Integer> edges) {

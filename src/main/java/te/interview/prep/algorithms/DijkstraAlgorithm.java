@@ -16,11 +16,11 @@ public class DijkstraAlgorithm {
         Map<Graph.Vertex, Integer> distanceToSrc = initDistancesToSource(graph, src);
         Map<Graph.Vertex, Graph.Vertex> previous = new HashMap<>();
 
-        PriorityQueue<Graph.Vertex> remaining = new PriorityQueue<>(Comparator.comparingInt(distanceToSrc::get));
-        remaining.add(src);
+        PriorityQueue<Graph.Vertex> queue = new PriorityQueue<>(Comparator.comparingInt(distanceToSrc::get));
+        queue.add(src);
 
-        while(!remaining.isEmpty()) {
-            Graph.Vertex v = remaining.poll();
+        while(!queue.isEmpty()) {
+            Graph.Vertex v = queue.poll();
 
             for(Graph.Vertex x : v.vertices) {
                 // Update our shortest path if the cost of src -> v -> x
@@ -29,7 +29,7 @@ public class DijkstraAlgorithm {
                 if(distanceToSrc.get(x) > newPath) {
                     distanceToSrc.put(x, newPath);
                     previous.put(x, v);
-                    remaining.add(x);
+                    queue.add(x);
                 }
             }
         }
