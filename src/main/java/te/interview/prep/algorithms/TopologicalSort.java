@@ -12,8 +12,8 @@ public class TopologicalSort {
 
     public List<Graph.Vertex> sort(Graph g) {
         // Count the number of incoming edges to each vertex
-        Map<te.interview.prep.algorithms.domain.Graph.Vertex, Integer> inboundEdgeCounts = new HashMap<>();
-        for (te.interview.prep.algorithms.domain.Graph.Vertex v : g.vertices) {
+        Map<Graph.Vertex, Integer> inboundEdgeCounts = new HashMap<>();
+        for (Graph.Vertex v : g.vertices) {
             inboundEdgeCounts.putIfAbsent(v, 0);
             for (Graph.Vertex u : v.vertices) {
                 inboundEdgeCounts.put(u, inboundEdgeCounts.getOrDefault(u, 0) + 1);
@@ -54,16 +54,16 @@ public class TopologicalSort {
         for (Graph.Vertex v : sorted) distanceFromSource.put(v, Integer.MAX_VALUE);
         distanceFromSource.put(source, 0);
 
-        for (Graph.Vertex u : sorted) {
+        for (Graph.Vertex v : sorted) {
             // All nodes prior to `source` will remain infinitely far away
-            if (distanceFromSource.get(u) == Integer.MAX_VALUE) continue;
+            if (distanceFromSource.get(v) == Integer.MAX_VALUE) continue;
 
-            for (Graph.Vertex v : u.vertices) {
-                // Update our shortest path estimate if our previous source -> v
-                // estimate is more expensive than our current source -> v estimate
-                int pathCost = distanceFromSource.get(u) + u.edgeWeights.get(v);
-                if (distanceFromSource.get(v) > pathCost) {
-                    distanceFromSource.put(v, pathCost);
+            for (Graph.Vertex x : v.vertices) {
+                // Update our shortest path estimate if our previous source -> x
+                // estimate is more expensive than our current source -> x estimate
+                int pathCost = distanceFromSource.get(v) + v.edgeWeights.get(x);
+                if (distanceFromSource.get(x) > pathCost) {
+                    distanceFromSource.put(x, pathCost);
                 }
             }
         }
