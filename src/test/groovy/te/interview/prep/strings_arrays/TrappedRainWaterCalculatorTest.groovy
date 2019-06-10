@@ -1,18 +1,21 @@
 package te.interview.prep.strings_arrays
 
-import groovy.transform.NotYetImplemented
+
 import spock.lang.Specification
 import spock.lang.Subject
 
 class TrappedRainWaterCalculatorTest extends Specification {
 
     @Subject
-    TrappedRainWaterCalculator rainWaterCalculator = []
+    TrappedRainWaterCalculator.UsingBruteForce bruteForceApproach = []
 
-    @NotYetImplemented
+    @Subject
+    TrappedRainWaterCalculator.UsingPointers pointerApproach = []
+
     def "can determine how much rain water is trapped"(int[] elevationHeights, int amountOfTrappedWater) {
         expect:
-            rainWaterCalculator.calculate(elevationHeights) == amountOfTrappedWater
+            bruteForceApproach.calculate(elevationHeights) == amountOfTrappedWater
+            pointerApproach.calculate(elevationHeights) == amountOfTrappedWater
 
         where:
             elevationHeights                     || amountOfTrappedWater
