@@ -11,93 +11,93 @@ class TopologicalSortTest extends Specification {
 
     def "can topologically sort unweighted DAG"() {
         given: 'a graph and a bunch of vertices'
-            Graph g = []
-            def v1 = new Graph.Vertex('A')
-            def v2 = new Graph.Vertex('B')
-            def v3 = new Graph.Vertex('C')
-            def v4 = new Graph.Vertex('D')
-            def v5 = new Graph.Vertex('E')
-            def v6 = new Graph.Vertex('F')
-            def v7 = new Graph.Vertex('G')
-            def v8 = new Graph.Vertex('H')
-            def v9 = new Graph.Vertex('I')
-            g.vertices.addAll([v9, v1, v8, v2, v7, v3, v6, v4, v5])
+            Graph graph = []
+            def a = new Graph.Vertex('A')
+            def b = new Graph.Vertex('B')
+            def c = new Graph.Vertex('C')
+            def d = new Graph.Vertex('D')
+            def e = new Graph.Vertex('E')
+            def f = new Graph.Vertex('F')
+            def g = new Graph.Vertex('G')
+            def h = new Graph.Vertex('H')
+            def i = new Graph.Vertex('I')
+            graph.vertices.addAll([i, a, h, b, g, c, f, d, e])
 
         and: 'B -> [C, E]'
-            v2.vertices = [v3, v5]
+            b.vertices = [c, e]
 
         and: 'D -> F'
-            v4.vertices = [v6]
+            d.vertices = [f]
 
         and: 'E -> F'
-            v5.vertices = [v6]
+            e.vertices = [f]
 
         and: 'F -> [G, I]'
-            v6.vertices = [v7, v9]
+            f.vertices = [g, i]
 
         and: 'I -> H'
-            v9.vertices = [v8]
+            i.vertices = [h]
 
         expect:
-            algorithm.sort(g)*.name == ['A', 'B', 'D', 'C', 'E', 'F', 'G', 'I', 'H']
+            algorithm.sort(graph)*.name == ['A', 'B', 'D', 'C', 'E', 'F', 'G', 'I', 'H']
     }
 
     def "can find the shortest-path in a weighted DAG"() {
         given: 'a graph and a bunch of vertices'
-            Graph g = []
-            def v1 = new Graph.Vertex('A')
-            def v2 = new Graph.Vertex('B')
-            def v3 = new Graph.Vertex('C')
-            def v4 = new Graph.Vertex('D')
-            def v5 = new Graph.Vertex('E')
-            def v6 = new Graph.Vertex('F')
-            def v7 = new Graph.Vertex('G')
-            def v8 = new Graph.Vertex('H')
-            def v9 = new Graph.Vertex('I')
-            g.vertices.addAll([v9, v1, v8, v2, v7, v3, v6, v4, v5])
+            Graph graph = []
+            def a = new Graph.Vertex('A')
+            def b = new Graph.Vertex('B')
+            def c = new Graph.Vertex('C')
+            def d = new Graph.Vertex('D')
+            def e = new Graph.Vertex('E')
+            def f = new Graph.Vertex('F')
+            def g = new Graph.Vertex('G')
+            def h = new Graph.Vertex('H')
+            def i = new Graph.Vertex('I')
+            graph.vertices.addAll([i, a, h, b, g, c, f, d, e])
 
         and: 'B -> [C(15), E(2)]'
-            v2.vertices = [v3, v5]
-            v2.edgeWeights[v3] = 15
-            v2.edgeWeights[v5] = 2
+            b.vertices = [c, e]
+            b.edgeWeights[c] = 15
+            b.edgeWeights[e] = 2
 
         and: 'C -> I(15)'
-            v3.vertices = [v8]
-            v3.edgeWeights[v8] = 15
+            c.vertices = [h]
+            c.edgeWeights[h] = 15
 
         and: 'D -> F(1)'
-            v4.vertices = [v6]
-            v4.edgeWeights[v6] = 1
+            d.vertices = [f]
+            d.edgeWeights[f] = 1
 
         and: 'E -> F(2)'
-            v5.vertices = [v6]
-            v5.edgeWeights[v6] = 2
+            e.vertices = [f]
+            e.edgeWeights[f] = 2
 
         and: 'F -> [G(1), I(3)]'
-            v6.vertices = [v7, v9]
-            v6.edgeWeights[v7] = 1
-            v6.edgeWeights[v9] = 3
+            f.vertices = [g, i]
+            f.edgeWeights[g] = 1
+            f.edgeWeights[i] = 3
 
         and: 'I -> H(1)'
-            v9.vertices = [v8]
-            v9.edgeWeights[v8] = 1
+            i.vertices = [h]
+            i.edgeWeights[h] = 1
 
         when:
-            def vertexToShortestPathCost = algorithm.findShortestPathsToAllOtherVertices(g, v2)
+            def vertexToShortestPathCost = algorithm.findShortestPathsToAllOtherVertices(graph, b)
 
         then: 'the shortest path to ourselves is 0'
-            vertexToShortestPathCost[v2] == 0
+            vertexToShortestPathCost[b] == 0
 
         and: 'A and D are inaccessible from B, so their distance is infinite'
-            vertexToShortestPathCost[v1] == Integer.MAX_VALUE
-            vertexToShortestPathCost[v4] == Integer.MAX_VALUE
+            vertexToShortestPathCost[a] == Integer.MAX_VALUE
+            vertexToShortestPathCost[d] == Integer.MAX_VALUE
 
         and: 'the shortest paths to the remaining elements is correct'
-            vertexToShortestPathCost[v3] == 15
-            vertexToShortestPathCost[v5] == 2
-            vertexToShortestPathCost[v6] == 4
-            vertexToShortestPathCost[v7] == 5
-            vertexToShortestPathCost[v8] == 8
-            vertexToShortestPathCost[v9] == 7
+            vertexToShortestPathCost[c] == 15
+            vertexToShortestPathCost[e] == 2
+            vertexToShortestPathCost[f] == 4
+            vertexToShortestPathCost[g] == 5
+            vertexToShortestPathCost[h] == 8
+            vertexToShortestPathCost[i] == 7
     }
 }
