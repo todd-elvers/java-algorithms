@@ -6,6 +6,12 @@ package te.interview.prep.integers;
 // TODO: Review later and try to remember both required formulas
 public class PowerCalculator {
 
+    /*
+        Time: O(log n)
+            Each time we apply our (x^n)^2 = x^2n formula we reduce n by half
+        Space: O(log n)
+            Each time we apply the above formula we store the result of x^n/2 in the stack
+     */
     public double calculate(double x, int exponent) {
         long n = exponent;
 
