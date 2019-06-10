@@ -34,14 +34,14 @@ public class GameOfLifeStateGenerator {
 
     // Cells have eight possible neighbors
     private int countLivingNeighbors(int[][] grid, int row, int column) {
-        return countIfAlive(grid, row - 1, column)                 // Up
-                + countIfAlive(grid, row - 1, column + 1)   // Up-Right
+        return countIfAlive(grid, row - 1, column)              // Up
+                + countIfAlive(grid, row - 1, column + 1)       // Up-Right
                 + countIfAlive(grid, row, column + 1)           // Right
-                + countIfAlive(grid, row + 1, column + 1)   // Down-Right
-                + countIfAlive(grid, row + 1, column)              // Down
-                + countIfAlive(grid, row + 1, column - 1)   // Down-Left
+                + countIfAlive(grid, row + 1, column + 1)       // Down-Right
+                + countIfAlive(grid, row + 1, column)           // Down
+                + countIfAlive(grid, row + 1, column - 1)       // Down-Left
                 + countIfAlive(grid, row, column - 1)           // Left
-                + countIfAlive(grid, row - 1, column - 1);  // Up-Left
+                + countIfAlive(grid, row - 1, column - 1);      // Up-Left
     }
 
     // Cells are alive if they're on the board and equal to 1
