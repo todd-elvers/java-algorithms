@@ -6,11 +6,13 @@ import spock.lang.Subject
 class HouseRobberMaxFinderTest extends Specification {
 
     @Subject
-    HouseRobberMaxFinder houseRobberMaxFinder = []
+    HouseRobberMaxFinder.UsingArray arrayApproach = []
+    HouseRobberMaxFinder.UsingTwoMaxes twoMaxesApproach = []
 
     def "can determine the correct max where now two used values are adjacent"(int[] nums, int max) {
         expect:
-            houseRobberMaxFinder.findMax(nums) == max
+            arrayApproach.findMax(nums) == max
+            twoMaxesApproach.findMax(nums) == max
 
         where:
             nums            || max
