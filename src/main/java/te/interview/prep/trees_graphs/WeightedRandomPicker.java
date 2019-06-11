@@ -11,8 +11,8 @@ public class WeightedRandomPicker {
     public Item pick(List<Item> items) {
         int sumOfWeights = items.stream().mapToInt(item -> item.weight).sum();
 
-        // Random weight between (1, sumOfWeights]
-        int randomWeight = randomIntFrom1To(sumOfWeights);
+        // Random weight between [0, sumOfWeights)
+        int randomWeight = new Random().nextInt(sumOfWeights) + 1;
 
         // The idea here is that the items with larger weights are more likely to
         // be chosen since they have a greater influence on our randomly chosen
@@ -25,14 +25,6 @@ public class WeightedRandomPicker {
         }
 
         throw new RuntimeException("Unexpected error while choosing random item");
-    }
-
-    /**
-     * Since nextInt(x) returns (0, x] we subtract one from x to get (0, x-1] so that we can then
-     * add one to the result to get our desired interval: (1, x]
-     */
-    private int randomIntFrom1To(int x) {
-        return new Random().nextInt(x - 1) + 1;
     }
 
     protected static class Item {
