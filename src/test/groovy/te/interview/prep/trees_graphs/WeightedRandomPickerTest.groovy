@@ -29,13 +29,25 @@ class WeightedRandomPickerTest extends Specification {
             }
 
         then:
-            println "Results:"
-            nameToTimesChosen.each {
-                println("$it.key = ${it.value.toString().padRight(4)} (${((it.value/iterations)*100).round()}%)")
+            printResults(nameToTimesChosen, iterations)
+
+        when:
+            iterations.times {
+                def randomItem = weightedRandomPicker.pickWithBinarySearch(items)
+                Integer totalTimesChosen = nameToTimesChosen.get(randomItem.name, 0) + 1
+                nameToTimesChosen.put(randomItem.name, totalTimesChosen)
             }
 
-        and:
-            true
+        then:
+            printResults(nameToTimesChosen, iterations)
     }
 
+    private static boolean printResults(Map<String, Integer> nameToTimesChosen, int iterations) {
+        println "Results:"
+        nameToTimesChosen.each {
+            println("$it.key = ${it.value.toString().padRight(4)} (${((it.value/iterations)*100).round()}%)")
+        }
+        nameToTimesChosen.clear()
+        return true
+    }
 }
