@@ -7,6 +7,8 @@ package te.interview.prep.strings_arrays;
 public class BestTimeToBuySellStock {
 
     public int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) return 0;
+
         int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
 

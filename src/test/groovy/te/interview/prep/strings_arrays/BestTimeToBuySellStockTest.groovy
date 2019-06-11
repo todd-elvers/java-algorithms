@@ -8,7 +8,7 @@ class BestTimeToBuySellStockTest extends Specification {
     @Subject
     BestTimeToBuySellStock bestTimeToBuySellStock = []
 
-    def "can determine best time to buy/sell stock"(int[] prices, int profit) {
+    def "can determine best time to buy/sell a single stock"(int[] prices, int profit) {
         expect:
             bestTimeToBuySellStock.maxProfit(prices) == profit
 
