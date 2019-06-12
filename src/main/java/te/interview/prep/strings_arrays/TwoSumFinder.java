@@ -1,29 +1,59 @@
 package te.interview.prep.strings_arrays;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @see <a href="https://leetcode.com/problems/two-sum/">Problem on leetcode</a>
  */
 public class TwoSumFinder {
 
-    public int[] find(int[] nums, int target) {
-        if(nums == null || nums.length == 0) return nums;
+    /*
+        Time : O(n)
+        Space: O(n)
+     */
+    static class UsingHashMap {
 
-        for(int i = 0; i < nums.length; i++) {
-            int secondIndex = findIndexForTargetSum(nums, target, i, i + 1);
-            if(secondIndex != -1) {
-                return new int[] { i, secondIndex };
+        public int[] find(int[] nums, int target) {
+            if (nums.length == 2) return new int[]{0, 1};
+
+            Map<Integer, Integer> valueToIndex = new HashMap<>();
+            for (int i = 0; i < nums.length; i++) {
+                int compliment = target - nums[i];
+
+                // i.e. have we seen a value already that, when subtracted from `target`,
+                // equals a value already present in the array.
+                if (valueToIndex.containsKey(compliment)) {
+                    return new int[]{valueToIndex.get(compliment), i};
+                } else {
+                    valueToIndex.put(nums[i], i);
+                }
             }
+
+            throw new IllegalArgumentException("Expected a two sum solution but none was found.");
         }
 
-        return null;
     }
 
-    private int findIndexForTargetSum(int[] nums, int targetSum, int firstIndex, int start) {
-        for (int i = start; i < nums.length; i++) {
-            if(nums[firstIndex] + nums[i] == targetSum) return i;
-        }
+    /*
+        Time : O(n^2)
+        Space: O(1)
+     */
+    static class UsingBruteForce {
 
-        return -1;
+        public int[] find(int[] nums, int target) {
+            if (nums.length == 2) return new int[]{0, 1};
+
+            for (int i = 0; i < nums.length; i++) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    if (nums[j] == target - nums[i]) {
+                        return new int[]{i, j};
+                    }
+                }
+            }
+
+            throw new IllegalArgumentException("Expected a two sum solution but none was found.");
+        }
     }
 
 }
