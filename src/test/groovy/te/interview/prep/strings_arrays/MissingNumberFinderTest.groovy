@@ -7,14 +7,16 @@ class MissingNumberFinderTest extends Specification {
 
     @Subject
     MissingNumberFinder.UsingHashSet setApproach = []
-
     @Subject
     MissingNumberFinder.UsingGaussFormula gaussApproach = []
+    @Subject
+    MissingNumberFinder.UsingXOR xorApproach = []
 
     def "can find the number missing from an array of n distinct numbers"(int[] nums, int missingNumber) {
         expect:
             setApproach.find(nums) == missingNumber
             gaussApproach.find(nums) == missingNumber
+            xorApproach.find(nums) == missingNumber
 
         where:
             nums                        || missingNumber

@@ -49,4 +49,24 @@ public class MissingNumberFinder {
         }
     }
 
+    /*
+        Time : O(n)
+        Space: O(1)
+     */
+    static class UsingXOR {
+
+        // By relying on the fact that XOR will return us the bits that are set in one
+        // value and not set in another, and that our missing value is between 0 and n,
+        // we can initialize our missing number to n and then remove all the bits set
+        // by all the numbers present in nums to get our missing number.
+        public int find(int[] nums) {
+            int missingNumber = nums.length;
+
+            for(int i = 0; i < nums.length; i++) {
+                missingNumber ^= i ^ nums[i];
+            }
+
+            return missingNumber;
+        }
+    }
 }
