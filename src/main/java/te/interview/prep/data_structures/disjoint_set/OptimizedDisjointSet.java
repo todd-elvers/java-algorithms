@@ -2,6 +2,8 @@ package te.interview.prep.data_structures.disjoint_set;
 
 // Optimized implementation that uses 2 arrays instead of a map
 public class OptimizedDisjointSet {
+    private static final int NON_EXISTENT = -1;
+
     private int[] parents;
     private int[] rank;
 
@@ -15,14 +17,14 @@ public class OptimizedDisjointSet {
     }
 
     public int find(int x) {
-        if (x < 0 || x > parents.length - 1) return -1;
+        if (x < 0 || x > parents.length - 1) return NON_EXISTENT;
         if (x != parents[x]) parents[x] = find(parents[x]);
         return parents[x];
     }
 
     public void union(int x, int y) {
         int xSet = find(x), ySet = find(y);
-        if (xSet == -1 || ySet == -1 || xSet == ySet) return;
+        if (xSet == NON_EXISTENT || ySet == NON_EXISTENT || xSet == ySet) return;
 
         unionByRank(xSet, ySet);
     }
@@ -41,19 +43,19 @@ public class OptimizedDisjointSet {
 
     public void remove(int x) {
         int setRepresentative = find(x);
-        if (setRepresentative == -1) return;
+        if (setRepresentative == NON_EXISTENT) return;
 
         // Remove all nodes who's set representative is x
-        int indexOfSetRep = -1;
+        int indexOfSetRep = NON_EXISTENT;
         for (int i = 0; i < parents.length; i++) {
             if (parents[i] != setRepresentative) {
                 indexOfSetRep = i;
             } else if (find(parents[i]) == setRepresentative) {
-                parents[i] = -1;
+                parents[i] = NON_EXISTENT;
             }
         }
 
         // Remove x itself
-        parents[indexOfSetRep] = 0;
+        parents[indexOfSetRep] = NON_EXISTENT;
     }
 }
