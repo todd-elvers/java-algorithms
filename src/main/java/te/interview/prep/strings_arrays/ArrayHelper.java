@@ -1,6 +1,9 @@
 package te.interview.prep.strings_arrays;
 
-public class ArrayHelper {
+/**
+ * Utility class comprised of helper functions for arrays (printing, etc.)
+ */
+public final class ArrayHelper {
     private ArrayHelper() {
     }
 
