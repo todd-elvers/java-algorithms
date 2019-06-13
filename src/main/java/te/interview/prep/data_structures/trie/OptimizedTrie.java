@@ -22,11 +22,14 @@ public class OptimizedTrie {
         Node current = root;
 
         for (char c : key.toCharArray()) {
-            if (current.getChild(c) == null) {
-                current.setChild(c, new Node());
+            Node next = current.getChild(c);
+
+            if(next == null) {
+                next = new Node();
+                current.setChild(c, next);
             }
 
-            current = current.getChild(c);
+            current = next;
         }
 
         current.value = value;
@@ -37,8 +40,9 @@ public class OptimizedTrie {
         Node current = root;
 
         for (char c : key.toCharArray()) {
-            if (current.getChild(c) == null) return null;
-            current = current.getChild(c);
+            Node next = current.getChild(c);
+            if (next == null) return null;
+            current = next;
         }
 
         return current.value;
@@ -58,13 +62,14 @@ public class OptimizedTrie {
             return current.isChildless();
         }
 
-        Node next = current.getChild(key.charAt(index));
+        char c = key.charAt(index);
+        Node next = current.getChild(c);
         if (next == null) return false;
 
         // If `next` node is empty and has no value, remove it from the tree entirely
         boolean isNextNodeChildless = delete(next, key, index + 1);
         if (isNextNodeChildless && next.value == null) {
-            current.setChild(key.charAt(index), null);
+            current.setChild(c, null);
             return current.isChildless();
         }
 
