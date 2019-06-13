@@ -1,48 +1,49 @@
 package te.interview.prep.strings_arrays;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @see <a href="https://leetcode.com/problems/diagonal-traverse/">Problem on leetcode</a>
  */
 public class DiagonalMatrixTraverser {
 
     public int[] traverse(int[][] matrix) {
-        if(matrix == null || matrix.length == 0) return new int[0];
+        if (matrix == null || matrix.length == 0) return new int[0];
 
-        List<Integer> results = new ArrayList<>();
+        int row = 0, col = 0, direction = 1;
+        int rowCount = matrix.length, columnCount = matrix[0].length;
+        int[] result = new int[rowCount * columnCount];
 
-        int row = 0, column = 0;
-        boolean wasSupposedToTraverseDown = false;
-        while (row <= matrix.length - 1) {
-            List<Integer> values = getValuesDiagonallyUp(new ArrayList<>(), matrix, row++, column);
-            if (wasSupposedToTraverseDown) Collections.reverse(values);
-            wasSupposedToTraverseDown = !wasSupposedToTraverseDown;
-            results.addAll(values);
+        for (int i = 0; i < result.length; i++) {
+            result[i] = matrix[row][col];
+            row -= direction;
+            col += direction;
+
+            // Bottom border boundary
+            if (row > rowCount - 1) {
+                row = rowCount - 1;
+                col += 2;
+                direction = -direction;
+            }
+
+            // Right border boundary
+            if (col > columnCount - 1) {
+                col = columnCount - 1;
+                row += 2;
+                direction = -direction;
+            }
+
+            // Top border boundary
+            if (row < 0) {
+                row = 0;
+                direction = -direction;
+            }
+
+            // Left border boundary
+            if (col < 0) {
+                col = 0;
+                direction = -direction;
+            }
         }
 
-        row--;      // Row is currently out-of-bounds since the above loop terminated, so we must correct that
-        column++;   // Column was 0 in all previous calls, so we must start it at one to prevent duplicate counts
-
-        while (column <= matrix[row].length - 1) {
-            List<Integer> values = getValuesDiagonallyUp(new ArrayList<>(), matrix, row, column++);
-            if (wasSupposedToTraverseDown) Collections.reverse(values);
-            wasSupposedToTraverseDown = !wasSupposedToTraverseDown;
-            results.addAll(values);
-        }
-
-        return results.stream().mapToInt(i -> i).toArray();
+        return result;
     }
-
-    private List<Integer> getValuesDiagonallyUp(List<Integer> values, int[][] matrix, int row, int column) {
-        if (row < 0 || row > matrix.length - 1) return values;            // Base case: row is out-of-bounds
-        if (column < 0 || column > matrix[row].length - 1) return values; // Base case: column is out-of-bounds
-
-        values.add(matrix[row][column]);
-
-        return getValuesDiagonallyUp(values, matrix, row - 1, column + 1);
-    }
-
 }
