@@ -16,20 +16,22 @@ public class LinkedListLoopFinder {
     // Improved approach
     static class FastSlowRunnerApproach {
         Optional<LoopNode<String>> findLoop(LoopNode<String> head) {
-            if(head == null || head.next == null) return Optional.empty();
+            if (head == null || head.next == null) return Optional.empty();
 
             LoopNode<String> fast = head;
             LoopNode<String> slow = head;
 
+            // Either we use a while-loop and an `if(slow == fast) break;` expression
+            // Or a do-while and include `slow != fast` as part of the looping condition
             do {
                 slow = slow.next;
                 fast = fast.next.next;
             } while(fast != null && fast.next != null && slow != fast);
 
-            if(slow != fast) return Optional.empty();
+            if (slow != fast) return Optional.empty();
 
             fast = head;
-            while(slow != fast){
+            while (slow != fast) {
                 slow = slow.next;
                 fast = fast.next;
             }
