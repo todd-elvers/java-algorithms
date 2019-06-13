@@ -17,8 +17,12 @@ public class PrimeCounter {
         // Half of the values up to n are even, so we can rule them out as primes immediately
         int primeCount = n / 2;
 
-        // For every odd number i up to sqr(n)
+        // If we're capable of multiplying any number by itself and getting an index
+        // in this array then that number by definition isn't a prime number because
+        // it is divisible by a number other than itself and 1.
         boolean[] isComposite = new boolean[n];
+
+        // For every odd number i up to sqr(n)
         for (int i = 3; i * i < n; i += 2) {
             if (isComposite[i]) continue;
 
