@@ -10,14 +10,15 @@ public class FindKthToLastElement {
         LinkedListNode slow = head;
 
         // Move 'fast' k nodes into the list
-        for (int i = 0; i < k + 1; i++) {
-            if (fast == null) return null;
+        for (int i = 0; i < k; i++) {
             fast = fast.next;
         }
 
+        if (fast == null) return slow;
+
         // Iterate both pointers until 'fast' is at the end at which point
         // 'slow' will be at the kth position in the linked list
-        while (fast != null) {
+        while (fast.next != null) {
             fast = fast.next;
             slow = slow.next;
         }

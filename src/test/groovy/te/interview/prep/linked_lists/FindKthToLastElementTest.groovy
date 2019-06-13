@@ -17,11 +17,12 @@ class FindKthToLastElementTest extends Specification {
             instance.findKthFromLastElement(linkedList, k).data == expectedData
 
         where:
-            k || expectedData
-            3 || 7
-            2 || 8
-            1 || 9
-            0 || 10
+            k  || expectedData
+            3  || 7
+            2  || 8
+            1  || 9
+            0  || 10
+            10 || 1
     }
 
 }
