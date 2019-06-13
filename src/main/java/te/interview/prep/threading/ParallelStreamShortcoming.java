@@ -1,8 +1,7 @@
 package te.interview.prep.threading;
 
 import java.util.Collection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
@@ -15,26 +14,57 @@ import java.util.stream.IntStream;
  * While this example doesn't use the {@link Collection#parallelStream()} directly it mimics the
  * behavior of it so there's no functional difference.
  */
+@SuppressWarnings("Duplicates")
 public class ParallelStreamShortcoming {
 
     public static void main(String[] args) throws InterruptedException {
-        ExecutorService es = Executors.newCachedThreadPool();
+        exampleOfProblem();
+        exampleOfSolution();
+    }
 
-        // Pretend a bunch of tasks were started from different threads
-        // that execute without any delay
-        es.execute(() -> runTask(0));
-        es.execute(() -> runTask(0));
-        es.execute(() -> runTask(0));
-        es.execute(() -> runTask(0));
-        es.execute(() -> runTask(0));
+    private static void exampleOfProblem() throws InterruptedException {
+        System.out.println("\nStarting problem scenario.");
+        ForkJoinPool commonPool = new ForkJoinPool(8);
 
-        // Then a single thread somewhere tries to run a parallel task that executes
+        // Pretend a bunch of tasks were started from different threads that
+        // execute without any delay
+        commonPool.execute(() -> runTask(0));
+        commonPool.execute(() -> runTask(0));
+        commonPool.execute(() -> runTask(0));
+        commonPool.execute(() -> runTask(0));
+        commonPool.execute(() -> runTask(0));
+
+        // Then a piece of code somewhere tries to run a parallel task that executes
         // with a 1 millisecond delay between every calculation, 1 million times.
         // Comment this line out to prove it's the culprit of our slow performance.
-        es.execute(() -> runTask(1));
+        commonPool.execute(() -> runTask(1));
 
-        es.shutdown();
-        es.awaitTermination(60, TimeUnit.SECONDS);
+        commonPool.shutdown();
+        commonPool.awaitTermination(60, TimeUnit.SECONDS);
+        System.out.println("All threads in `commonPool` have completed.");
+    }
+
+    // This shows how always using your own thread pool guarantees we don't run into the problem
+    private static void exampleOfSolution() throws InterruptedException {
+        System.out.println("\nStarting solution scenario.");
+
+        ForkJoinPool slowPool = new ForkJoinPool(8);
+        slowPool.execute(() -> runTask(1));
+
+        ForkJoinPool fastPool = new ForkJoinPool(8);
+        fastPool.execute(() -> runTask(0));
+        fastPool.execute(() -> runTask(0));
+        fastPool.execute(() -> runTask(0));
+        fastPool.execute(() -> runTask(0));
+        fastPool.execute(() -> runTask(0));
+
+        fastPool.shutdown();
+        fastPool.awaitTermination(60, TimeUnit.SECONDS);
+        System.out.println("All threads in `fastPool` have completed.");
+
+        slowPool.shutdown();
+        slowPool.awaitTermination(60, TimeUnit.SECONDS);
+        System.out.println("All threads in `slowPool` have completed.");
     }
 
     private static void runTask(int artificialDelay) {
