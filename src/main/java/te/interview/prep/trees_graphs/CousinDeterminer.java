@@ -11,44 +11,55 @@ public class CousinDeterminer {
         if (root == null || root.data == x || root.data == y || x == y) return false;
 
         List<TreeNode> queue = new LinkedList<>();
-
         queue.add(root);
 
-        TreeNode xParent = null, yParent = null;
-        int xHeight = 0, yHeight = 0, height = 0;
+        TreeNode xParent = null;
+        TreeNode yParent = null;
+
+        int xHeight = 0;
+        int yHeight = 0;
+        int totalHeight = 0;
 
         // Every iteration of the loop represents one level of the tree
         while (!queue.isEmpty()) {
             List<TreeNode> parents = queue;
             queue = new LinkedList<>();
-            height++;
+
+            totalHeight++;
 
             for (TreeNode parent : parents) {
+
+                // Look for parent of x or y in left branch
                 if (parent.left != null) {
                     queue.add(parent.left);
+
                     if (parent.left.data == x) {
-                        xHeight = height;
+                        xHeight = totalHeight;
                         xParent = parent;
                     }
                     if (parent.left.data == y) {
-                        yHeight = height;
+                        yHeight = totalHeight;
                         yParent = parent;
                     }
                 }
+
+                // Look for parent of x or y in right branch
                 if (parent.right != null) {
                     queue.add(parent.right);
+
                     if (parent.right.data == x) {
-                        xHeight = height;
+                        xHeight = totalHeight;
                         xParent = parent;
                     }
                     if (parent.right.data == y) {
-                        yHeight = height;
+                        yHeight = totalHeight;
                         yParent = parent;
                     }
                 }
             }
         }
 
+        // Two nodes are cousins if they have the same height but different parents
         return xHeight == yHeight && xParent != yParent;
     }
 
