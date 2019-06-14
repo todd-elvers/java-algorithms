@@ -10,7 +10,6 @@ import java.util.Map;
  * 4.7 Determine the build order for projects given their dependencies
  * TODO: Determine how to handle cycles in our dependency graph
  * TODO: Lookup definition for Strongly-Connected Components (SCC)
- * TODO: Analyze Tarjan's algorithm for detecting loops in Graphs
  */
 public class BuildOrderDeterminer {
 
@@ -26,16 +25,17 @@ public class BuildOrderDeterminer {
             projectNameToNode.put(projectName, new DependencyGraph.Node(projectName));
         }
 
+        // Given (x,y) this updates y to contain a link to x with x gaining an inLink and y gaining an outLink
         for(String[] dependency : dependencies) {
-            DependencyGraph.Node dependentProject = projectNameToNode.get(dependency[0]);
-            DependencyGraph.Node projectWithDependency = projectNameToNode.get(dependency[1]);
+            DependencyGraph.Node dependentProject = projectNameToNode.get(dependency[0]);           // y
+            DependencyGraph.Node projectWithDependency = projectNameToNode.get(dependency[1]);      // x
 
-            // Given (x,y) y now contains a link to x, x has another inLink, y has another outLink
             projectWithDependency.adjacentNodes.add(dependentProject);
             dependentProject.inLinks++;
             projectWithDependency.outLinks++;
         }
 
+        // Connect nodes with no in-links to the graph
         DependencyGraph graph = new DependencyGraph();
         for (DependencyGraph.Node node : projectNameToNode.values()) {
             if(node.inLinks == 0) {
@@ -54,7 +54,8 @@ public class BuildOrderDeterminer {
         String[] leastToMostDependentProjects = new String[numProjects];
         int buildOrderIndex = numProjects - 1;
 
-        // Populate the queue only with nodes that contain links to other nodes
+        // Add only the project that actually depend on other projects to the graph
+        // (We'll handle the orphan dependencies last)
         for (DependencyGraph.Node node : graph.nodes) {
             if(node.outLinks > 0) {
                 node.visited = true;
@@ -62,6 +63,7 @@ public class BuildOrderDeterminer {
             }
         }
 
+        // BFS the dependency graph
         while(!queue.isEmpty()) {
             DependencyGraph.Node node = queue.remove();
 
