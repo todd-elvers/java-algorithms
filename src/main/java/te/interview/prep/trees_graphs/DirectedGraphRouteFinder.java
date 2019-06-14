@@ -9,6 +9,7 @@ import te.interview.prep.trees_graphs.domain.GraphNode;
  */
 public class DirectedGraphRouteFinder {
 
+    // Simple BFS until we find a link from `src` to `dest`
     public boolean doesRouteExist(GraphNode src, GraphNode dest) {
         LinkedList<GraphNode> nodesToVisit = new LinkedList<>();
         src.setVisited(true);
