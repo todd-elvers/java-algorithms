@@ -27,7 +27,7 @@ public class CombinationSumFinder {
         } else if (remaining > 0) {
             for (int i = start; i < nums.length; i++) {
                 temp.add(nums[i]);
-                // Not i+1 b/c we're our output is allowed to reuse values
+                // Not i+1 b/c our output is allowed to reuse values
                 backtrack(results, temp, nums, i, remaining - nums[i]);
                 temp.remove(temp.size() - 1);
             }
