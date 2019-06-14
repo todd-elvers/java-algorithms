@@ -40,13 +40,15 @@ public class BSTIterator {
         }
     }
 
-    private TreeNode leftMostOrSelf(TreeNode node) {
-        TreeNode leftMost = node;
-        while (leftMost.left != null) {
-            parents.push(leftMost);
-            leftMost = leftMost.left;
+    private TreeNode leftMostOrSelf(TreeNode self) {
+        TreeNode node = self;
+
+        while (node.left != null) {
+            parents.push(node);
+            node = node.left;
         }
-        return leftMost;
+
+        return node;
     }
 
     /**
