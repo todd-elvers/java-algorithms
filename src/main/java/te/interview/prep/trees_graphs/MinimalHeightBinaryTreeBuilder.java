@@ -13,7 +13,7 @@ public class MinimalHeightBinaryTreeBuilder {
 
     private TreeNode buildMinimalTree(int[] sortedInput, int start, int end) {
         // Base case: line 24 generates a call with a negative end
-        if(end < start) {
+        if(start > end) {
             return null;
         }
 
