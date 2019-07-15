@@ -9,17 +9,12 @@ import java.util.List;
 public class ParenthesesCombinationFinder {
 
     List<String> findCombinations(int n) {
-        return backtrack(
-                new ArrayList<>(),
-                "",
-
-                0,
-                0,
-                n
-        );
+        ArrayList<String> results = new ArrayList<>();
+        backtrack(results, "", 0, 0, n);
+        return results;
     }
 
-    private List<String> backtrack(List<String> results, String result, int openCount, int closedCount, int n) {
+    private void backtrack(List<String> results, String result, int openCount, int closedCount, int n) {
         if (result.length() == 2*n) {
             results.add(result);
         } else {
@@ -33,8 +28,6 @@ public class ParenthesesCombinationFinder {
                 backtrack(results, result + ")", openCount, closedCount + 1, n);
             }
         }
-
-        return results;
     }
 
 }

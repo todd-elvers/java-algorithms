@@ -9,12 +9,7 @@ import java.util.List;
 public class PalindromePartitioner {
 
     public List<List<String>> partition(String str) {
-        return backtrack(
-                new ArrayList<>(),
-                new ArrayList<>(),
-                str,
-                0
-        );
+        return backtrack(new ArrayList<>(), new ArrayList<>(), str, 0);
     }
 
     private List<List<String>> backtrack(List<List<String>> results, List<String> temp, String str, int start) {

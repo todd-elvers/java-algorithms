@@ -12,16 +12,12 @@ public class UniqueCombinationSumFinder {
     public List<List<Integer>> findAll(int[] candidates, int target) {
         Arrays.sort(candidates);
 
-        return backtrack(
-                new ArrayList<>(),
-                new ArrayList<>(),
-                candidates,
-                0,
-                target
-        );
+        List<List<Integer>> results = new ArrayList<>();
+        backtrack(results, new ArrayList<>(), candidates, 0, target);
+        return results;
     }
 
-    private List<List<Integer>> backtrack(List<List<Integer>> results, List<Integer> temp, int[] nums, int start, int remaining) {
+    private void backtrack(List<List<Integer>> results, List<Integer> temp, int[] nums, int start, int remaining) {
         if (remaining == 0) {
             results.add(new ArrayList<>(temp));
         } else if (remaining > 0) {
@@ -33,8 +29,6 @@ public class UniqueCombinationSumFinder {
                 temp.remove(temp.size() - 1);
             }
         }
-
-        return results;
     }
 
 }

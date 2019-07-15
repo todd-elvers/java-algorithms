@@ -13,20 +13,17 @@ public class UniquePermutationGenerator {
         // This ensures our simple duplicate check of nums[i]==nums[i-1] always works
         Arrays.sort(nums);
 
-        return backtrack(
-                new ArrayList<>(),
-                new ArrayList<>(),
-                nums,
-                new boolean[nums.length]
-        );
+        List<List<Integer>> results = new ArrayList<>();
+        backtrack(results, new ArrayList<>(), nums, new boolean[nums.length]);
+        return results;
     }
 
-    private List<List<Integer>> backtrack(List<List<Integer>> results, ArrayList<Integer> temp, int[] nums, boolean[] isUsed) {
-        if(temp.size() == nums.length) {
+    private void backtrack(List<List<Integer>> results, ArrayList<Integer> temp, int[] nums, boolean[] isUsed) {
+        if (temp.size() == nums.length) {
             results.add(new ArrayList<>(temp));
         } else {
-            for(int i = 0; i < nums.length; i++) {
-                if(isCurrentValueSkippable(i, nums, isUsed)) continue;
+            for (int i = 0; i < nums.length; i++) {
+                if (isCurrentValueSkippable(i, nums, isUsed)) continue;
 
                 isUsed[i] = true;
                 temp.add(nums[i]);
@@ -37,17 +34,14 @@ public class UniquePermutationGenerator {
                 temp.remove(temp.size() - 1);
             }
         }
-
-        return results;
     }
 
     /**
-     * Returns true if, and only if, the current value has been used OR if
-     * the current value is unused, and it equals the previous value which
-     * is also unused.
+     * Returns true if, and only if, the current value has been used OR if the current value is
+     * unused, and it equals the previous value which is also unused.
      */
     private boolean isCurrentValueSkippable(int i, int[] nums, boolean[] isUsed) {
-        if(isUsed[i]) return true;
+        if (isUsed[i]) return true;
 
         return i > 0 && nums[i] == nums[i-1] && !isUsed[i-1];
     }
